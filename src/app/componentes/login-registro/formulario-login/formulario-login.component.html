@@ -1,0 +1,33 @@
+<section>
+    <div class="min-h-screen flex items-center justify-center flex-col">
+        <div class="mb-8 text-center">
+            <p class="text-4xl font-bold">💰 Gestor de presupuesto</p>
+            <p class="text-gray-600">Tu herramienta para el control financiero personal</p>
+        </div>
+        <div class="bg-white rounded-lg border-2 shadow-lg w-[450px] h-[380px]">
+            <form [formGroup]="formularioLogin">
+                <div class="text-center mt-5">
+                    <p class="text-2xl font-bold">¡Inicia Sesión!</p>
+                    <p class="text-gray-600">Ingresa tus credenciales para acceder a tu cuenta</p>
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Correo Electrónico</label>
+                    <input class="border-2 border-gray-300 rounded-lg mr-5 mt-2 pl-2" type="text" placeholder="tu@email.com" formControlName="email" />
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Contraseña</label>
+                    <input class="border-2 border-gray-300 rounded-lg mr-5 mt-2 pl-2" type="password" placeholder="••••••••" formControlName="password" />
+                </div>
+                <div class="mt-5 flex justify-center">
+                    <button class="flex flex-row bg-blue-500 rounded-lg w-full ml-5 mr-5 justify-center">
+                        <img class="p-2 w-10 h-10" src="assets/icons/login.png" alt="">
+                        <p class="p-2 text-white">Iniciar Sesión</p>
+                    </button>
+                </div>
+                <div class="text-center mt-7 mb-5">
+                    <p>¿No tienes una cuenta? <a class="text-blue-500 font-semibold" href="#">Regístrate aquí</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,11 @@ export class FormularioLoginComponent {
       email: [''],
       password: ['']
     });
+  }
+
+  @Output() registrar = new EventEmitter<void>();
+  mostrarRegistro(){
+    this.registrar.emit();
   }
 
 }

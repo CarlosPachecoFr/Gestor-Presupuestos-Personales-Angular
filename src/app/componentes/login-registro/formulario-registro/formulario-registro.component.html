@@ -1,1 +1,41 @@
-<p>formulario-registro works!</p>
+<section class="min-h-screen flex items-center justify-center flex-col">
+    <div>
+        <div class="text-center mb-8">
+            <p class="font-bold text-4xl">💰Gestor de presupuesto</p>
+            <p class="text-gray-600">Tu herramienta para el control financiero personal</p>
+        </div>
+        <div class="bg-white rounded-lg border-2 shadow-lg w-[450px]">
+            <form [formGroup]="formularioRegistro">
+                <div class="text-center mt-5">
+                    <p class="font-bold text-2xl">¡Crear Cuenta!</p>
+                    <p class="text-gray-600">Únete y comienza a gestionar tu presupuesto personal</p>
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Nombre</label>
+                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="text" placeholder="Juan" formControlName="nombre">
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Apellido</label>
+                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="text" placeholder="Pérez" formControlName="apellido">
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Correo Electrónico</label>
+                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="email" placeholder="tu@email.com" formControlName="email">
+                </div>
+                <div class="flex flex-col ml-5 mt-5">
+                    <label>Contraseña</label>
+                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="password" placeholder="••••••••" formControlName="password">
+                </div>
+                <div class="mt-5 flex justify-center">
+                    <button class="flex flex-row bg-[#1983f5] w-full ml-5 mr-5 rounded-lg justify-center hover:bg-[#1f73ce]">
+                        <img class="p-2 w-10 h-10" src="assets/icons/registro.png" alt="">
+                        <p class="p-2 text-white">Crear Cuenta</p>
+                    </button>
+                </div>
+                <div class="text-center mt-7 mb-7">
+                    <button (click)="mostrarLogin()">¿Ya tienes una cuenta? <span class="text-blue-500 font-semibold hover:cursor-pointer hover:text-[#1f73ce]">Inicia Sesión aquí</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

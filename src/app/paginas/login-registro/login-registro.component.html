@@ -1,1 +1,6 @@
-<app-formulario-login />
+@if(mostrarLogin){
+    <app-formulario-login (registrar)="cambiarFormulario()"/>
+}
+@else {
+    <app-formulario-registro (login)="cambiarFormulario()"/>
+}

@@ -9,7 +9,7 @@ import { FormularioRegistroComponent } from "../../componentes/login-registro/fo
   styleUrl: './login-registro.component.css'
 })
 export class LoginRegistroComponent {
-  mostrarLogin: boolean = false;
+  mostrarLogin: boolean = true;
 
   cambiarFormulario(){
     this.mostrarLogin = !this.mostrarLogin;

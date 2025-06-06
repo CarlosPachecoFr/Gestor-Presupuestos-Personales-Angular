@@ -24,10 +24,10 @@
                 </div>
                 <div class="flex flex-col ml-5 mt-5">
                     <label>Contraseña</label>
-                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="password" placeholder="••••••••" formControlName="password">
+                    <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="password" placeholder="••••••••" formControlName="contraseña">
                 </div>
                 <div class="mt-5 flex justify-center">
-                    <button class="flex flex-row bg-[#1983f5] w-full ml-5 mr-5 rounded-lg justify-center hover:bg-[#1f73ce]">
+                    <button (click)="registrarUsuario()" class="flex flex-row bg-[#1983f5] w-full ml-5 mr-5 rounded-lg justify-center hover:bg-[#1f73ce]">
                         <img class="p-2 w-10 h-10" src="assets/icons/registro.png" alt="">
                         <p class="p-2 text-white">Crear Cuenta</p>
                     </button>

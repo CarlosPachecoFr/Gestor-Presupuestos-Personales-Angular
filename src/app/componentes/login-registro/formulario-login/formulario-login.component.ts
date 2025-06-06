@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 
@@ -11,11 +11,12 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class FormularioLoginComponent {
   formularioLogin: FormGroup;
+  mensajeError: string = '';
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {
     this.formularioLogin = this.formBuilder.group({
-      email: [''],
-      contraseña: ['']
+      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      contraseña: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
@@ -27,10 +28,16 @@ export class FormularioLoginComponent {
   async loginUsuario(){
     if(this.formularioLogin.valid){
       const request = this.formularioLogin.value;
-      const response = await firstValueFrom(this.authService.loginUsuario(request));
-      localStorage.setItem('token', response.access_token);
-      console.log('Token guardado en localStorage:', response.access_token);
-      this.formularioLogin.reset();
+      try {
+        const response = await firstValueFrom(this.authService.loginUsuario(request));
+        localStorage.setItem('token', response.access_token);
+        console.log('Token guardado en localStorage:', response.access_token);
+        this.formularioLogin.reset();
+      } catch (error: any) {
+        if (error.status === 403) {
+          this.mensajeError = 'Email o contraseña incorrectos';
+        }
+      }
     }
     else {
       this.formularioLogin.markAllAsTouched();

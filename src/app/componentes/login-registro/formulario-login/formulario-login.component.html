@@ -10,13 +10,34 @@
                     <p class="text-2xl font-bold">¡Inicia Sesión!</p>
                     <p class="text-gray-600">Ingresa tus credenciales para acceder a tu cuenta</p>
                 </div>
+                @if(mensajeError){
+                    <div class="flex justify-center mt-2">
+                        <p class="text-[#ff0000]">{{mensajeError}}</p>
+                    </div>
+                }
                 <div class="flex flex-col ml-5 mt-5">
                     <label class="font-semibold">Correo Electrónico</label>
                     <input class="border-2 border-gray-300 rounded-lg mr-5 mt-2 p-2" type="email" placeholder="tu@email.com" formControlName="email" />
+                    @if(formularioLogin.get("email")?.touched && formularioLogin.get("email")?.invalid){
+                        @if(formularioLogin.get("email")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                        @if(formularioLogin.get("email")?.errors?.['pattern']){
+                            <span class="text-[#ff0000]">El formato del correo electrónico es incorrecto</span>
+                        }
+                    }
                 </div>
                 <div class="flex flex-col ml-5 mt-5">
                     <label class="font-semibold">Contraseña</label>
                     <input class="border-2 border-gray-300 rounded-lg mr-5 mt-2 p-2" type="password" placeholder="••••••••" formControlName="contraseña" />
+                    @if(formularioLogin.get("contraseña")?.touched && formularioLogin.get("contraseña")?.invalid){
+                        @if(formularioLogin.get("contraseña")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                        @if(formularioLogin.get("contraseña")?.errors?.['minlength']){
+                            <span class="text-[#ff0000]">La contraseña debe tener al menos 4 caracteres</span>
+                        }
+                    }
                 </div>
                 <div class="mt-5 flex justify-center">
                     <button (click)="loginUsuario()" class="flex flex-row bg-[#1983f5] rounded-lg w-full ml-5 mr-5 justify-center hover:bg-[#1f73ce]">

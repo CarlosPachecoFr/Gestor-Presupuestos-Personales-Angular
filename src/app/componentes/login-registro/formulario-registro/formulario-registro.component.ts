@@ -11,13 +11,14 @@ import { firstValueFrom } from 'rxjs';
 })
 export class FormularioRegistroComponent {
   formularioRegistro: FormGroup;
+  mensajeError: string = '';
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService){
     this.formularioRegistro = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      contraseña: ['', Validators.required]
+      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      contraseña: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
@@ -29,11 +30,18 @@ export class FormularioRegistroComponent {
   async registrarUsuario(){
     if(this.formularioRegistro.valid){
       const request = this.formularioRegistro.value;
-      const response = await firstValueFrom(this.authService.registrarUsuario(request));
-      localStorage.setItem('token', response.access_token);
-      console.log('Token guardado en localStorage:', response.access_token);
-      this.formularioRegistro.reset();
-    }else{
+      try {
+        const response = await firstValueFrom(this.authService.registrarUsuario(request));  
+        localStorage.setItem('token', response.access_token);
+        console.log('Token guardado en localStorage:', response.access_token);
+        this.formularioRegistro.reset();
+      } catch (error: any) {
+        if(error.status === 403) {
+          this.mensajeError = 'El usuario ya está registrado';
+        }
+      }
+    }
+    else{
       this.formularioRegistro.markAllAsTouched();
     }
   }

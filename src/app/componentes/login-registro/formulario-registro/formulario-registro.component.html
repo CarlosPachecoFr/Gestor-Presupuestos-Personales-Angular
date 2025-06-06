@@ -4,27 +4,58 @@
             <p class="font-bold text-4xl">💰Gestor de presupuesto</p>
             <p class="text-gray-600">Tu herramienta para el control financiero personal</p>
         </div>
-        <div class="bg-white rounded-lg border-2 shadow-lg w-[450px]">
+        <div class="bg-white rounded-lg border-2 shadow-lg w-[450px] mb-8">
             <form [formGroup]="formularioRegistro">
                 <div class="text-center mt-5">
                     <p class="font-bold text-2xl">¡Crear Cuenta!</p>
                     <p class="text-gray-600">Únete y comienza a gestionar tu presupuesto personal</p>
                 </div>
+                @if(mensajeError){
+                    <div class="flex justify-center mt-2">
+                        <p class="text-[#ff0000]">{{mensajeError}}</p>
+                    </div>
+                }
                 <div class="flex flex-col ml-5 mt-5">
                     <label>Nombre</label>
                     <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="text" placeholder="Juan" formControlName="nombre">
+                    @if(formularioRegistro.get("nombre")?.touched && formularioRegistro.get("nombre")?.invalid){
+                        @if(formularioRegistro.get("nombre")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                    }
                 </div>
                 <div class="flex flex-col ml-5 mt-5">
                     <label>Apellido</label>
                     <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="text" placeholder="Pérez" formControlName="apellido">
+                    @if(formularioRegistro.get("apellido")?.touched && formularioRegistro.get("apellido")?.invalid){
+                        @if(formularioRegistro.get("apellido")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                    }
                 </div>
                 <div class="flex flex-col ml-5 mt-5">
                     <label>Correo Electrónico</label>
                     <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="email" placeholder="tu@email.com" formControlName="email">
+                    @if(formularioRegistro.get("email")?.touched && formularioRegistro.get("email")?.invalid){
+                        @if(formularioRegistro.get("email")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                        @if(formularioRegistro.get("email")?.errors?.['pattern']){
+                            <span class="text-[#ff0000]">El formato del correo electrónico es incorrecto</span>
+                        }
+                    }
                 </div>
                 <div class="flex flex-col ml-5 mt-5">
                     <label>Contraseña</label>
                     <input class="rounded-lg border-2 p-2 border-gray-300 mr-5 mt-2" type="password" placeholder="••••••••" formControlName="contraseña">
+                    @if(formularioRegistro.get("contraseña")?.touched && formularioRegistro.get("contraseña")?.invalid){
+                        @if(formularioRegistro.get("contraseña")?.errors?.['required']){
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                        @if(formularioRegistro.get("contraseña")?.errors?.['minlength']){
+                            <span class="text-[#ff0000]">La contraseña debe tener al menos 4 caracteres</span>
+                        }
+                    }
                 </div>
                 <div class="mt-5 flex justify-center">
                     <button (click)="registrarUsuario()" class="flex flex-row bg-[#1983f5] w-full ml-5 mr-5 rounded-lg justify-center hover:bg-[#1f73ce]">

@@ -3,8 +3,8 @@
         <p class="text-4xl font-bold">💰Gestor de Presupuesto Personal</p>
         <p class="text-gray-600">Controla tus finanzas y alcanza tus metas de ahorro</p>
     </div>
-    <div class="grid grid-cols-4 ml-20 mr-20">
-        <div class="rounded-lg  border-2 border-[#C2F7D5] bg-gradient-to-br from-[#E5FCED] to-[#C2F7D5] w-[250px] hover:shadow-lg">
+    <div class="grid grid-cols-4 ml-20 mr-20 gap-20">
+        <div class="rounded-lg  border-2 border-[#C2F7D5] bg-gradient-to-br from-[#E5FCED] to-[#C2F7D5] hover:shadow-lg transition duration-300 ease-in-out">
             <div class="flex flex-row pl-5 pt-5 pb-3">
                 <p class="font-semibold text-[#166534]">Ingresos totales</p>
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/flechaHaciaArriba.png" alt="">
@@ -16,7 +16,7 @@
                 <p class="text-[13px] text-[#16A34A]">+2.5% desde el mes pasado</p>
             </div>
         </div>
-        <div class="rounded-lg  border-2 border-[#FECACA] bg-gradient-to-br from-[#FEEAEA] to-[#ffd9d9] w-[250px] hover:shadow-lg">
+        <div class="rounded-lg  border-2 border-[#FECACA] bg-gradient-to-br from-[#FEEAEA] to-[#ffd9d9] hover:shadow-lg transition duration-300 ease-in-out">
             <div class="flex flex-row pl-5 pt-5 pb-3">
                 <p class="font-semibold text-[#991B1B]">Gastos totales</p>
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/flechaHaciaAbajo.png" alt="">
@@ -28,11 +28,29 @@
                 <p class="text-[13px] text-[#DC2626]">+1.2% desde el mes pasado</p>
             </div>
         </div>
-        <div>
-
+        <div class="rounded-lg  border-2 border-[#BFDBFE] bg-gradient-to-br from-[#E5F0FE] to-[#c5ddff] hover:shadow-lg transition duration-300 ease-in-out">
+            <div class="flex flex-row pl-5 pt-5 pb-3">
+                <p class="font-semibold text-[#1E40AF]">Balance</p>
+                <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/euro.png" alt="">
+            </div>
+            <div class="pl-5">
+                <p class="text-2xl font-bold text-[#14532D]">3450€</p> <!-- Luego cambiar por el dato obtenido de la API -->
+            </div>
+            <div class="pl-5 pb-5 pt-2">
+                <p class="text-[13px] text-[#4A63EC]">Superávit este mes</p>
+            </div>
         </div>
-        <div>
-
+        <div class="rounded-lg  border-2 border-[#E9D5FF] bg-gradient-to-br from-[#F6EFFF] to-[#e2cdfc] hover:shadow-lg transition duration-300 ease-in-out">
+            <div class="flex flex-row pl-5 pt-5 pb-3">
+                <p class="font-semibold text-[#6B21A8]">Tasa de ahorro</p>
+                <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/flechaHaciaAbajo.png" alt="">
+            </div>
+            <div class="pl-5">
+                <p class="text-2xl font-bold text-[#581C87]">65.1%</p> <!-- Luego cambiar por el dato obtenido de la API -->
+            </div>
+            <div class="pl-5 pb-5 pt-2">
+                <p class="text-[13px] text-[#9333EA]">Meta: 20%</p>
+            </div>
         </div>
     </div>
 </section>

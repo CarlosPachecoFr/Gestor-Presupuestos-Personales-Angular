@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-login',
@@ -13,7 +14,7 @@ export class FormularioLoginComponent {
   formularioLogin: FormGroup;
   mensajeError: string = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.formularioLogin = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       contraseña: ['', [Validators.required, Validators.minLength(4)]]
@@ -33,6 +34,7 @@ export class FormularioLoginComponent {
         localStorage.setItem('token', response.access_token);
         console.log('Token guardado en localStorage:', response.access_token);
         this.formularioLogin.reset();
+        this.router.navigate(['/home']);
       } catch (error: any) {
         if (error.status === 403) {
           this.mensajeError = 'Email o contraseña incorrectos';

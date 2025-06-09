@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 export interface RegisterRequest {
   id: number,
-  noombre: string,
+  nombre: string,
   apellido: string,
   email: string,
   contraseña: string

@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-registro',
@@ -13,7 +14,7 @@ export class FormularioRegistroComponent {
   formularioRegistro: FormGroup;
   mensajeError: string = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService){
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router){
     this.formularioRegistro = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -35,6 +36,7 @@ export class FormularioRegistroComponent {
         localStorage.setItem('token', response.access_token);
         console.log('Token guardado en localStorage:', response.access_token);
         this.formularioRegistro.reset();
+        this.router.navigate(['/home']);
       } catch (error: any) {
         if(error.status === 403) {
           this.mensajeError = 'El usuario ya está registrado';

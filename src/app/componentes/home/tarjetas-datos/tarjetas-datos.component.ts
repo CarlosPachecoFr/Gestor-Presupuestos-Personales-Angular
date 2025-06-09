@@ -9,28 +9,38 @@ import { TransaccionService } from '../../../services/transaccion.service';
 })
 export class TarjetasDatosComponent {
 
-  totalIngresos: number = 0;
-  totalGastos: number = 0;
-  balance: number = 0;
-  tasaAhorro: number = 0;
+  ingresosMensuales: number = 0;
+  gastosMensuales: number = 0;
+  balanceMensual: number = 0;
+  tasaAhorroMensual: number = 0;
+  variacionIngresos: number = 0;
+  variacionGastos: number = 0;
 
   constructor(private transaccionService: TransaccionService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(){
-    this.transaccionService.obtenerTotalIngresosPorId().subscribe(totalIngresos => {
-      this.totalIngresos = totalIngresos;
+    this.transaccionService.obtenerIngresosMensualPorId().subscribe(ingresosMensuales => {
+      this.ingresosMensuales = ingresosMensuales;
     });
 
-    this.transaccionService.obtenerTotalGastosPorId().subscribe(totalGastos => {
-      this.totalGastos = totalGastos;
+    this.transaccionService.obtenerGastosMensualPorId().subscribe(gastosMensuales => {
+      this.gastosMensuales = gastosMensuales;
     });
 
-    this.transaccionService.obtenerBalancePorId().subscribe(balance => {
-      this.balance = balance;
+    this.transaccionService.obtenerBalanceMensualPorId().subscribe(balanceMensual => {
+      this.balanceMensual = balanceMensual;
     });
 
-    this.transaccionService.obtenerTasaAhorroPorId().subscribe(tasaAhorro => {
-      this.tasaAhorro = tasaAhorro;
+    this.transaccionService.obtenerTasaAhorroMensualPorId().subscribe(tasaAhorroMensual => {
+      this.tasaAhorroMensual = tasaAhorroMensual;
+    });
+
+    this.transaccionService.variacionIngresosMesAnteriorPorId().subscribe(variacionIngresos => {
+      this.variacionIngresos = variacionIngresos;
+    });
+
+    this.transaccionService.variacionGastosMesAnteriorPorId().subscribe(variacionGastos => {
+      this.variacionGastos = variacionGastos;
     });
   }
 }

@@ -10,10 +10,15 @@
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/flechaHaciaArriba.png" alt="">
             </div>
             <div class="pl-5">
-                <p class="text-2xl font-bold text-[#14532D]">{{totalIngresos}}€</p>
+                <p class="text-2xl font-bold text-[#14532D]">{{ingresosMensuales}}€</p>
             </div>
             <div class="pl-5 pb-5 pt-2">
-                <p class="text-[13px] text-[#16A34A]">+2.5% desde el mes pasado</p>
+                @if(variacionIngresos > 0) {
+                    <p class="text-[13px] text-[#16A34A]">+{{variacionIngresos}}% desde el mes pasado</p>
+                }
+                @else {
+                    <p class="text-[13px] text-[#16A34A]">{{variacionIngresos}}% desde el mes pasado</p>
+                }
             </div>
         </div>
         <div class="rounded-lg  border-2 border-[#FECACA] bg-gradient-to-br from-[#FEEAEA] to-[#ffd9d9] hover:shadow-lg transition duration-300 ease-in-out">
@@ -22,10 +27,15 @@
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/flechaHaciaAbajo.png" alt="">
             </div>
             <div class="pl-5">
-                <p class="text-2xl font-bold text-[#7F1D1D]">{{totalGastos}}€</p> <!-- Luego cambiar por el dato obtenido de la API -->
+                <p class="text-2xl font-bold text-[#7F1D1D]">{{gastosMensuales}}€</p>
             </div>
             <div class="pl-5 pb-5 pt-2">
-                <p class="text-[13px] text-[#DC2626]">+1.2% desde el mes pasado</p>
+                @if(variacionGastos > 0){
+                    <p class="text-[13px] text-[#DC2626]">+{{variacionGastos}}% desde el mes pasado</p>
+                }
+                @else {
+                    <p class="text-[13px] text-[#DC2626]">{{variacionGastos}}% desde el mes pasado</p>
+                }
             </div>
         </div>
         <div class="rounded-lg  border-2 border-[#BFDBFE] bg-gradient-to-br from-[#E5F0FE] to-[#c5ddff] hover:shadow-lg transition duration-300 ease-in-out">
@@ -34,10 +44,15 @@
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/euro.png" alt="">
             </div>
             <div class="pl-5">
-                <p class="text-2xl font-bold text-[#14532D]">{{balance}}€</p> <!-- Luego cambiar por el dato obtenido de la API -->
+                <p class="text-2xl font-bold text-[#14532D]">{{balanceMensual}}€</p>
             </div>
             <div class="pl-5 pb-5 pt-2">
-                <p class="text-[13px] text-[#4A63EC]">Superávit este mes</p>
+                @if(ingresosMensuales - gastosMensuales > 0) {
+                    <p class="text-[13px] text-[#4A63EC]">Superávit este mes</p>
+                }
+                @else {
+                    <p class="text-[13px] text-[#4A63EC]">Déficit este mes</p>
+                }
             </div>
         </div>
         <div class="rounded-lg  border-2 border-[#E9D5FF] bg-gradient-to-br from-[#F6EFFF] to-[#e2cdfc] hover:shadow-lg transition duration-300 ease-in-out">
@@ -46,7 +61,7 @@
                 <img class="w-10 h-4 ml-auto pr-5" src="/assets/icons/graficaHaciaArriba.png" alt="">
             </div>
             <div class="pl-5">
-                <p class="text-2xl font-bold text-[#581C87]">{{tasaAhorro}}%</p> <!-- Luego cambiar por el dato obtenido de la API -->
+                <p class="text-2xl font-bold text-[#581C87]">{{tasaAhorroMensual}}%</p>
             </div>
             <div class="pl-5 pb-5 pt-2">
                 <p class="text-[13px] text-[#9333EA]">Meta: 20%</p>

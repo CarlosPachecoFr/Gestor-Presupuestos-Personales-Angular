@@ -58,4 +58,58 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerIngresosMensualPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/obtenerIngresosMensualPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  obtenerGastosMensualPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/obtenerGastosMensualPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  obtenerBalanceMensualPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/obtenerBalanceMensualPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  obtenerTasaAhorroMensualPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/obtenerTasaAhorroMensualPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  variacionIngresosMesAnteriorPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/variacionIngresosMesAnteriorPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  variacionGastosMesAnteriorPorId(){
+    const token = localStorage.getItem('token');
+    return this.http.get<number>(`${this.apiUrl}/variacionGastosMesAnteriorPorId`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

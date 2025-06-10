@@ -32,7 +32,6 @@ export class FormularioLoginComponent {
       try {
         const response = await firstValueFrom(this.authService.loginUsuario(request));
         localStorage.setItem('token', response.access_token);
-        console.log('Token guardado en localStorage:', response.access_token);
         this.formularioLogin.reset();
         this.router.navigate(['/home']);
       } catch (error: any) {

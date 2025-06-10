@@ -16,7 +16,7 @@ export class TarjetasDatosComponent {
   variacionIngresos: number = 0;
   variacionGastos: number = 0;
 
-  constructor(private transaccionService: TransaccionService, private cdRef: ChangeDetectorRef) {}
+  constructor(private transaccionService: TransaccionService) {}
 
   ngOnInit(){
     this.transaccionService.obtenerIngresosMensualPorId().subscribe(ingresosMensuales => {

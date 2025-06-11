@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { TarjetasDatosComponent } from "../../componentes/home/tarjetas-datos/tarjetas-datos.component";
 import { FormularioTransaccionComponent } from "../../componentes/home/formulario-transaccion/formulario-transaccion.component";
+import { TransaccionesRecientesComponent } from "../../componentes/home/transacciones-recientes/transacciones-recientes.component";
 
 @Component({
   selector: 'app-home',
-  imports: [TarjetasDatosComponent, FormularioTransaccionComponent],
+  imports: [TarjetasDatosComponent, FormularioTransaccionComponent, TransaccionesRecientesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

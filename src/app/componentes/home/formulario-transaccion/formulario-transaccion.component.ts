@@ -21,7 +21,7 @@ export class FormularioTransaccionComponent {
       tipo: ['ingreso'],
       cantidad: ['', [Validators.required, Validators.min(0.01)]],
       categoria: [''],
-      descripcion: ['']
+      descripcion: ['', Validators.required]
     })
   }
 

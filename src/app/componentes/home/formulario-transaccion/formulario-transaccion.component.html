@@ -49,6 +49,11 @@
             <div class="grid grid-cols-1 pl-5 pr-5 pt-5">
                 <label class="font-semibold pb-2">Descripción</label>
                 <input class="border-2 rounded-lg flex pb-10 pt-1 pl-2" type="text" placeholder="Descripción de la transacción..." formControlName="descripcion">
+                @if(formularioTransaccion.get('descripcion')?.touched && formularioTransaccion.get('descripcion')?.invalid) {
+                    @if(formularioTransaccion.get('descripcion')?.errors?.['required']) {
+                        <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                    }
+                }
             </div>
             <div class="p-5">
             @if(valorTipo == 'ingreso'){

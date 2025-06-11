@@ -112,4 +112,13 @@ export class TransaccionService {
       }
     });
   }
+
+  crearTransaccion(transaccion: Transaccion) {
+    const token = localStorage.getItem('token');
+    return this.http.post<Transaccion>(`${this.apiUrl}/crearTransaccion`, transaccion, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

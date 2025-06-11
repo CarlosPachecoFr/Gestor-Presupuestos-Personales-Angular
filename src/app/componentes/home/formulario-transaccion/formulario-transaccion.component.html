@@ -4,24 +4,32 @@
             <img class="w-6 h-7 pt-1" src="/assets/icons/masNegro.png" alt="">
             <p class="text-xl font-semibold pl-1">Añadir Nueva Transacción</p>
         </div>
-        <form>
+        <form [formGroup]="formularioTransaccion">
             <div class="grid grid-cols-2">
                 <div class="flex flex-col pl-5 pr-5">
                     <label class="font-semibold pb-2">Tipo</label>
-                    <select name="tipo" class="rounded-lg border-2 p-2" (change)="cambiarTipo($event)">
+                    <select name="tipo" class="rounded-lg border-2 p-2" (change)="cambiarTipo($event)" formControlName="tipo">
                         <option class="text-green-500" value="ingreso">💰Ingreso</option>
                         <option class="text-red-500" value="gasto">💸Gasto</option>
                     </select>
                 </div>
                 <div class="flex flex-col pr-5">
                     <label class="font-semibold pb-2">Cantidad</label>
-                    <input class="rounded-lg border-2 p-2" type="number" placeholder="0.00">
+                    <input class="rounded-lg border-2 p-2" type="number" placeholder="0.00" formControlName="cantidad">
+                    @if (formularioTransaccion.get('cantidad')?.touched && formularioTransaccion.get('cantidad')?.invalid) {
+                        @if(formularioTransaccion.get('cantidad')?.errors?.['required']) {
+                            <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                        }
+                        @if(formularioTransaccion.get('cantidad')?.errors?.['min']) {
+                            <span class="text-[#ff0000]">El valor mínimo es 0.01</span>
+                        }
+                    }
                 </div>
             </div>
             <div class="grid grid-cols-1 pl-5 pr-5 pt-5">
                 <label class="font-semibold pb-2">Categoría</label>
                 @if(valorTipo == 'ingreso'){
-                    <select name="categoria" class="rounded-lg border-2 p-2">
+                    <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
                         <option value="salario">Salario</option>
                         <option value="alquiler">Alquiler</option>
                         <option value="bonos">Bonos</option>
@@ -29,7 +37,7 @@
                     </select>
                 }
                 @else {
-                    <select name="categoria" class="rounded-lg border-2 p-2">
+                    <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
                         <option value="ropa">Ropa</option>
                         <option value="comida">Comida</option>
                         <option value="transporte">Transporte</option>
@@ -40,17 +48,17 @@
             </div>
             <div class="grid grid-cols-1 pl-5 pr-5 pt-5">
                 <label class="font-semibold pb-2">Descripción</label>
-                <input class="border-2 rounded-lg flex pb-10 pt-1 pl-1" type="text" placeholder="Descripción de la transacción...">
+                <input class="border-2 rounded-lg flex pb-10 pt-1 pl-2" type="text" placeholder="Descripción de la transacción..." formControlName="descripcion">
             </div>
             <div class="p-5">
             @if(valorTipo == 'ingreso'){
-                <button class=" flex flex-row w-full bg-green-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+                <button (click)="crearTransaccion()" class=" flex flex-row w-full bg-green-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
                     <img class="w-7 h-7" src="/assets/icons/masBlanco.png" alt="">
                     <p class="text-white font-semibold pl-2">Añadir Ingreso</p>
                 </button>
             }
             @else {
-                <button class="flex flex-row w-full bg-red-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">  
+                <button (click)="crearTransaccion()" class="flex flex-row w-full bg-red-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">  
                     <img class="w-7 h-7" src="/assets/icons/masBlanco.png" alt="">
                     <p class="text-white font-semibold pl-2">Añadir Gasto</p>
                 </button>

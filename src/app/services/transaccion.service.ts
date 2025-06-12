@@ -121,4 +121,13 @@ export class TransaccionService {
       }
     });
   }
+  obtenerUltimasTransacciones(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Transaccion[]>(`${this.apiUrl}/obtenerUltimasTransacciones`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
 }

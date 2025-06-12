@@ -21,6 +21,14 @@ export class TransaccionesRecientesComponent {
   constructor(private transaccionService: TransaccionService){}
 
   ngOnInit(){
+    this.cargarUltmasTransacciones();
+    
+    this.transaccionService.transaccionesActualizadas$.subscribe(() => {
+      this.cargarUltmasTransacciones();
+    });
+  }
+
+  cargarUltmasTransacciones(){
     this.transaccionService.obtenerUltimasTransacciones().subscribe(transacciones => {
       this.ultimasTransacciones = transacciones;
     });

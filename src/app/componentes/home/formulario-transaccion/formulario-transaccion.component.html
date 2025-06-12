@@ -30,6 +30,7 @@
                 <label class="font-semibold pb-2">Categoría</label>
                 @if(valorTipo == 'ingreso'){
                     <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
+                        <option value="" disabled selected hidden>Seleccionar categoría</option>
                         <option value="salario">Salario</option>
                         <option value="alquiler">Alquiler</option>
                         <option value="bonos">Bonos</option>
@@ -38,6 +39,7 @@
                 }
                 @else {
                     <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
+                        <option value="" disabled selected hidden>Seleccionar categoría</option>
                         <option value="ropa">Ropa</option>
                         <option value="comida">Comida</option>
                         <option value="transporte">Transporte</option>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 export interface Transaccion {
   id: number,
@@ -18,10 +19,16 @@ export interface Transaccion {
 export class TransaccionService {
 
   private apiUrl = environment.apiUrl + '/transaccion';
+  private transaccionesActualizadas = new Subject<void>();
+  transaccionesActualizadas$ = this.transaccionesActualizadas.asObservable();
 
   constructor(
     private http: HttpClient
   ) { }
+
+  notificarCambio() {
+    this.transaccionesActualizadas.next();
+  }
 
   obtenerTotalIngresosPorId(){
     const token = localStorage.getItem('token');

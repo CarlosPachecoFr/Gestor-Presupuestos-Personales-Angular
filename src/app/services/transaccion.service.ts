@@ -137,4 +137,21 @@ export class TransaccionService {
     });
   }
 
+  obtenerIngresosUltimosMeses(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerIngresosUltimosMeses`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  obtenerGastosUltimosMeses(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosUltimosMeses`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

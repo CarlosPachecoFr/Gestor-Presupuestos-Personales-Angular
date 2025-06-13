@@ -154,4 +154,13 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerGastosPorCategoria(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosPorCategoria`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

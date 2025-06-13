@@ -9,7 +9,17 @@
             </apx-chart>
         </div>
         <div class="bg-white rounded-lg border-2 col-span-2">
-
+            <apx-chart
+                [series]="donutChartOptions.series"
+                [chart]="donutChartOptions.chart"
+                [labels]="donutChartOptions.labels"
+                [legend]="donutChartOptions.legend"
+                [dataLabels]="donutChartOptions.dataLabels"
+                [tooltip]="donutChartOptions.tooltip"
+                [title]="donutChartOptions.title"
+                [plotOptions]="donutChartOptions.plotOptions"
+                [colors]="donutChartOptions.colors">
+            </apx-chart>
         </div>
     </div>
 </section>

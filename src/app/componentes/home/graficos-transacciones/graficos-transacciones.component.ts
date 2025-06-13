@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle } from 'ng-apexcharts';
+import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexResponsive, ApexDataLabels, ApexLegend, ApexTooltip, ApexPlotOptions } from 'ng-apexcharts';
 import { TransaccionService } from '../../../services/transaccion.service';
+import { title } from 'node:process';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -8,6 +9,19 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
 };
+
+export type DonutChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  labels: string[];
+  title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
+  responsive?: ApexResponsive[];
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  legend: ApexLegend;
+  colors: string[];
+}
 
 @Component({
   selector: 'app-graficos-transacciones',
@@ -17,18 +31,21 @@ export type ChartOptions = {
 })
 export class GraficosTransaccionesComponent {
   public chartOptions!: ChartOptions;
+  public donutChartOptions!: DonutChartOptions;
 
   constructor(private transaccionService: TransaccionService) {
   }
 
   ngOnInit(){
-    this.cargarDatos();
+    this.cargarDatosArea();
+    this.cargarDatosDonut();
     this.transaccionService.transaccionesActualizadas$.subscribe(() => {
-      this.cargarDatos();
+      this.cargarDatosArea();
+      this.cargarDatosDonut();
     });
   }
 
-  cargarDatos(){
+  cargarDatosArea(){
     this.transaccionService.obtenerIngresosUltimosMeses().subscribe(ingresosData => {
     this.transaccionService.obtenerGastosUltimosMeses().subscribe(gastosData => {
 
@@ -73,5 +90,49 @@ export class GraficosTransaccionesComponent {
 
     });
   });
+  }
+
+  cargarDatosDonut(){
+    this.transaccionService.obtenerGastosPorCategoria().subscribe(data => {
+      const porcentajes = data.map((item: any) => item[1]);
+      const categorias = data.map((item: any) => item[0]);
+      
+      this.donutChartOptions = {
+        series: porcentajes,
+        chart:{
+          type: 'donut'
+        }, 
+        labels: categorias,
+        title: {
+          text: "Distribución de Gastos por Categoría",
+          margin: 50,
+          offsetX: 10,
+          style: {
+            fontSize: '20px',
+            fontWeight: 'bold',
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          formatter: (val:number) => val.toFixed(1) + '%'
+        },
+        tooltip: {
+          y: {
+            formatter: (val: number) => `${val.toFixed(1)} €`
+          }
+        },
+        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        legend: {
+          position: 'right',
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: '0%',
+            }
+          }
+        }
+      }
+    })
   }
 }

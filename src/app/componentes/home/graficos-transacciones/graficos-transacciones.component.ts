@@ -31,17 +31,21 @@ export type DonutChartOptions = {
 })
 export class GraficosTransaccionesComponent {
   public chartOptions!: ChartOptions;
-  public donutChartOptions!: DonutChartOptions;
+  public donutChartOptionsGastos!: DonutChartOptions;
+  public donutChartOptionsIngresos!: DonutChartOptions;
+  mostrarIngresos: boolean =  true;
 
   constructor(private transaccionService: TransaccionService) {
   }
 
   ngOnInit(){
     this.cargarDatosArea();
-    this.cargarDatosDonut();
+    this.cargarDatosDonutGastos();
+    this.cargarDatosDonutIngresos();
     this.transaccionService.transaccionesActualizadas$.subscribe(() => {
       this.cargarDatosArea();
-      this.cargarDatosDonut();
+      this.cargarDatosDonutGastos();
+      this.cargarDatosDonutIngresos();
     });
   }
 
@@ -71,7 +75,7 @@ export class GraficosTransaccionesComponent {
         },
         chart: {
           type: 'area',
-          height: 350,
+          height: 400,
           stacked: false,
           toolbar: {
             show: false
@@ -92,21 +96,20 @@ export class GraficosTransaccionesComponent {
   });
   }
 
-  cargarDatosDonut(){
+  cargarDatosDonutGastos(){
     this.transaccionService.obtenerGastosPorCategoria().subscribe(data => {
       const porcentajes = data.map((item: any) => item[1]);
       const categorias = data.map((item: any) => item[0]);
       
-      this.donutChartOptions = {
+      this.donutChartOptionsGastos = {
         series: porcentajes,
         chart:{
-          type: 'donut'
+          type: 'donut',
         }, 
         labels: categorias,
         title: {
-          text: "Distribución de Gastos por Categoría",
-          margin: 50,
-          offsetX: 10,
+          text: "Gastos Mensuales por Categoría",
+          margin: 10,
           style: {
             fontSize: '20px',
             fontWeight: 'bold',
@@ -134,5 +137,52 @@ export class GraficosTransaccionesComponent {
         }
       }
     })
+  }
+
+  cargarDatosDonutIngresos(){
+    this.transaccionService.obtenerIngresosPorCategoria().subscribe(data => {
+      const porcentajes = data.map((item: any) => item[1]);
+      const categorias = data.map((item: any) => item[0]);
+      
+      this.donutChartOptionsIngresos = {
+        series: porcentajes,
+        chart:{
+          type: 'donut'
+        }, 
+        labels: categorias,
+        title: {
+          text: "Ingresos Mensuales por Categoría",
+          margin: 10,
+          style: {
+            fontSize: '20px',
+            fontWeight: 'bold',
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          formatter: (val:number) => val.toFixed(1) + '%'
+        },
+        tooltip: {
+          y: {
+            formatter: (val: number) => `${val.toFixed(1)} €`
+          }
+        },
+        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        legend: {
+          position: 'right',
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: '0%',
+            }
+          }
+        }
+      }
+    })
+  }
+  
+  cambiarGrafico(){
+    this.mostrarIngresos = !this.mostrarIngresos;
   }
 }

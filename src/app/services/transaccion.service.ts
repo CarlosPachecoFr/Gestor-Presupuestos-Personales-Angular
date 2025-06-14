@@ -163,4 +163,13 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerIngresosPorCategoria(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerIngresosPorCategoria`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

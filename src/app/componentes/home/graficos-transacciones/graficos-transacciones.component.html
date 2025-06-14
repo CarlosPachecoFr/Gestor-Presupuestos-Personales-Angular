@@ -1,6 +1,6 @@
 <section >
     <div class="grid grid-cols-5 ml-20 mr-20 mt-8 gap-8">
-        <div class="bg-white rounded-lg border-2 col-span-3">
+        <div class="bg-white rounded-lg border-2 col-span-3 shadow-lg">
             <apx-chart
                 [series]="chartOptions.series"
                 [chart]="chartOptions.chart"
@@ -8,18 +8,45 @@
                 [title]="chartOptions.title">
             </apx-chart>
         </div>
-        <div class="bg-white rounded-lg border-2 col-span-2">
-            <apx-chart
-                [series]="donutChartOptions.series"
-                [chart]="donutChartOptions.chart"
-                [labels]="donutChartOptions.labels"
-                [legend]="donutChartOptions.legend"
-                [dataLabels]="donutChartOptions.dataLabels"
-                [tooltip]="donutChartOptions.tooltip"
-                [title]="donutChartOptions.title"
-                [plotOptions]="donutChartOptions.plotOptions"
-                [colors]="donutChartOptions.colors">
-            </apx-chart>
-        </div>
+        @if(mostrarIngresos){
+            <div class="bg-white rounded-lg border-2 col-span-2 p-5 shadow-lg">
+                <apx-chart
+                    [series]="donutChartOptionsIngresos.series"
+                    [chart]="donutChartOptionsIngresos.chart"
+                    [labels]="donutChartOptionsIngresos.labels"
+                    [legend]="donutChartOptionsIngresos.legend"
+                    [dataLabels]="donutChartOptionsIngresos.dataLabels"
+                    [tooltip]="donutChartOptionsIngresos.tooltip"
+                    [title]="donutChartOptionsIngresos.title"
+                    [plotOptions]="donutChartOptionsIngresos.plotOptions"
+                    [colors]="donutChartOptionsIngresos.colors">
+                </apx-chart>
+                <div class="flex justify-end">
+                    <button (click)="cambiarGrafico()" class="bg-red-600 w-40 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">
+                        <p class="text-white font-semibold p-1">Ver Gastos</p>
+                    </button>
+                </div>
+            </div>
+        }
+        @else {
+            <div class="bg-white rounded-lg border-2 col-span-2 p-5 shadow-lg">
+                <apx-chart
+                    [series]="donutChartOptionsGastos.series"
+                    [chart]="donutChartOptionsGastos.chart"
+                    [labels]="donutChartOptionsGastos.labels"
+                    [legend]="donutChartOptionsGastos.legend"
+                    [dataLabels]="donutChartOptionsGastos.dataLabels"
+                    [tooltip]="donutChartOptionsGastos.tooltip"
+                    [title]="donutChartOptionsGastos.title"
+                    [plotOptions]="donutChartOptionsGastos.plotOptions"
+                    [colors]="donutChartOptionsGastos.colors">
+                </apx-chart>
+                <div class="flex justify-end">
+                    <button (click)="cambiarGrafico()" class="bg-green-600 w-40 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+                        <p class="text-white font-semibold p-1">Ver Ingresos</p>
+                    </button>
+                </div>
+            </div>
+        }
     </div>
 </section>

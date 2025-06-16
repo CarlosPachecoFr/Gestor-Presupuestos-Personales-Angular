@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexResponsive, ApexDataLabels, ApexLegend, ApexTooltip, ApexPlotOptions } from 'ng-apexcharts';
 import { TransaccionService } from '../../../services/transaccion.service';
-import { title } from 'node:process';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
+  responsive: ApexResponsive[];
 };
 
 export type DonutChartOptions = {
@@ -16,7 +16,7 @@ export type DonutChartOptions = {
   labels: string[];
   title: ApexTitleSubtitle;
   tooltip: ApexTooltip;
-  responsive?: ApexResponsive[];
+  responsive: ApexResponsive[];
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   legend: ApexLegend;
@@ -89,7 +89,22 @@ export class GraficosTransaccionesComponent {
             fontSize: '20px',
             fontWeight: 'bold',
           }
-        }
+        },
+        responsive: [
+          {
+            breakpoint: 640,
+            options: {
+              title: {
+                style: {
+                  fontSize: '16px',
+                }
+              },
+              legend: {
+                fontSize: '10px',
+              }
+            }
+          }
+        ]
       };
 
     });
@@ -127,6 +142,7 @@ export class GraficosTransaccionesComponent {
         colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
         legend: {
           position: 'right',
+          offsetY: 50,
         },
         plotOptions: {
           pie: {
@@ -134,7 +150,23 @@ export class GraficosTransaccionesComponent {
               size: '0%',
             }
           }
+        },
+        responsive: [
+          {
+          breakpoint: 640,
+          options: {
+            title: {
+              style: {
+                fontSize: '16px',
+              }
+            },
+            legend: {
+              offsetY: 20,
+              fontSize: '10px',
+            }
+          }
         }
+      ]
       }
     })
   }
@@ -170,6 +202,7 @@ export class GraficosTransaccionesComponent {
         colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
         legend: {
           position: 'right',
+          offsetY: 50,
         },
         plotOptions: {
           pie: {
@@ -177,7 +210,21 @@ export class GraficosTransaccionesComponent {
               size: '0%',
             }
           }
-        }
+        },
+        responsive: [{
+          breakpoint: 640,
+          options: {
+            title: {
+              style: {
+                fontSize: '16px',
+              }
+            },
+            legend: {
+              offsetY: 20,
+              fontSize: '10px',
+            }
+          }
+        }]
       }
     })
   }

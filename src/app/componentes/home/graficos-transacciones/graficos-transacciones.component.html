@@ -1,15 +1,16 @@
 <section >
-    <div class="grid grid-cols-5 ml-20 mr-20 mt-8 gap-8">
-        <div class="bg-white rounded-lg border-2 col-span-3 shadow-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-5 mx-4 sm:mx-20 mt-8 gap-8">
+        <div class="bg-white rounded-lg border-2 lg:col-span-3 shadow-lg">
             <apx-chart
                 [series]="chartOptions.series"
                 [chart]="chartOptions.chart"
                 [xaxis]="chartOptions.xaxis"
-                [title]="chartOptions.title">
+                [title]="chartOptions.title"
+                [responsive]="chartOptions.responsive">
             </apx-chart>
         </div>
         @if(mostrarIngresos){
-            <div class="bg-white rounded-lg border-2 col-span-2 p-5 shadow-lg">
+            <div class="bg-white rounded-lg border-2 lg:col-span-2 p-5 shadow-lg flex flex-col justify-between h-full">
                 <apx-chart
                     [series]="donutChartOptionsIngresos.series"
                     [chart]="donutChartOptionsIngresos.chart"
@@ -19,17 +20,18 @@
                     [tooltip]="donutChartOptionsIngresos.tooltip"
                     [title]="donutChartOptionsIngresos.title"
                     [plotOptions]="donutChartOptionsIngresos.plotOptions"
-                    [colors]="donutChartOptionsIngresos.colors">
+                    [colors]="donutChartOptionsIngresos.colors"
+                    [responsive]="donutChartOptionsIngresos.responsive">
                 </apx-chart>
                 <div class="flex justify-end">
-                    <button (click)="cambiarGrafico()" class="bg-red-600 w-40 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">
-                        <p class="text-white font-semibold p-1">Ver Gastos</p>
+                    <button (click)="cambiarGrafico()" class="bg-red-600 w-30 sm:w-40 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">
+                        <p class="text-white font-semibold p-2 sm:p-1 text-[13px] sm:text-[16px]">Ver Gastos</p>
                     </button>
                 </div>
             </div>
         }
         @else {
-            <div class="bg-white rounded-lg border-2 col-span-2 p-5 shadow-lg">
+            <div class="bg-white rounded-lg border-2 lg:col-span-2 p-5 shadow-lg flex flex-col justify-between h-full">
                 <apx-chart
                     [series]="donutChartOptionsGastos.series"
                     [chart]="donutChartOptionsGastos.chart"
@@ -39,11 +41,12 @@
                     [tooltip]="donutChartOptionsGastos.tooltip"
                     [title]="donutChartOptionsGastos.title"
                     [plotOptions]="donutChartOptionsGastos.plotOptions"
-                    [colors]="donutChartOptionsGastos.colors">
+                    [colors]="donutChartOptionsGastos.colors"
+                    [responsive]="donutChartOptionsGastos.responsive">
                 </apx-chart>
                 <div class="flex justify-end">
-                    <button (click)="cambiarGrafico()" class="bg-green-600 w-40 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
-                        <p class="text-white font-semibold p-1">Ver Ingresos</p>
+                    <button (click)="cambiarGrafico()" class="bg-green-600 w-30 sm:w-40 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+                        <p class="text-white font-semibold p-2 sm:p-1 text-[13px] sm:text-[16px]">Ver Ingresos</p>
                     </button>
                 </div>
             </div>

@@ -1,11 +1,11 @@
-<section class="flex items-center justify-center flex-col mt-8 ml-20 mr-20">
+<section class="flex items-center justify-center flex-col mt-8 mx-4 sm:mx-20">
     <div class="bg-white w-full flex flex-col rounded-lg border-2 shadow-lg">
         <div class="p-5 flex flex-row">
             <img class="w-6 h-7 pt-1" src="/assets/icons/masNegro.png" alt="">
             <p class="text-xl font-semibold pl-1">Añadir Nueva Transacción</p>
         </div>
         <form [formGroup]="formularioTransaccion">
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2">
                 <div class="flex flex-col pl-5 pr-5">
                     <label class="font-semibold pb-2">Tipo</label>
                     <select name="tipo" class="rounded-lg border-2 p-2" (change)="cambiarTipo($event)" formControlName="tipo">
@@ -13,7 +13,7 @@
                         <option class="text-red-500" value="gasto">💸Gasto</option>
                     </select>
                 </div>
-                <div class="flex flex-col pr-5">
+                <div class="flex flex-col pl-5 pt-5 sm:pt-0 sm:pl-0 pr-5">
                     <label class="font-semibold pb-2">Cantidad</label>
                     <input class="rounded-lg border-2 p-2" type="number" placeholder="0.00" formControlName="cantidad">
                     @if (formularioTransaccion.get('cantidad')?.touched && formularioTransaccion.get('cantidad')?.invalid) {

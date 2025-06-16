@@ -1,4 +1,4 @@
-<section class="bg-white mr-20 mt-8 ml-20 mb-8 rounded-lg border-2 shadow-lg">
+<section class="bg-white sm:mx-20 mx-4 mt-8 mb-8 rounded-lg border-2 shadow-lg">
     <div>
         <div class="p-5">
             <p class="font-semibold text-xl">Transacciones Recientes</p>
@@ -18,11 +18,11 @@
                 }
                 <div class="flex flex-col justify-center">
                     <p class="font-semibold">{{ transaccion.descripcion }}</p>
-                    <div class="flex flex-row space-x-2">
+                    <div class="flex flex-row space-x-1 sm:space-x-2">
                         <div class="bg-gray-100 rounded-full">
-                            <p class="text-sm text-gray-600 pl-2 pr-2 pt-1 pb-1 font-semibold">{{ transaccion.categoria }}</p>
+                            <p class="text-xs sm:text-sm text-gray-600 px-1 sm:px-2 pt-1 pb-1 font-semibold">{{ transaccion.categoria }}</p>
                         </div>
-                        <p class="text-sm text-gray-600 pt-1 pl-2">{{ transaccion.fecha_transaccion | date: 'd MMMM y' }}</p>
+                        <p class="text-xs sm:text-sm text-gray-600 pt-1 sm:pl-2">{{ transaccion.fecha_transaccion | date: 'd MMMM y' }}</p>
                     </div>
                 </div>
                 @if(transaccion.tipo === 'ingreso'){

@@ -1,37 +1,90 @@
 <section class="mx-4 sm:mx-20">
-    <div class="grid grid-cols-6 text-center bg-gray-200 mt-8 rounded-lg">
+    <div class="mt-8 block md:hidden">
+        <mat-form-field appearance="fill" class="w-full rounded-lg bg-gray-200">
+            <mat-select class="text-center font-semibold" [(value)]="opcionMenu" (selectionChange)="cambiarOpcionMenu($event.value)" panelClass="custom-select-panel">
+                <mat-select-trigger>
+                    <div class="flex items-center justify-center space-x-2">
+                        <img 
+                        [src]="'assets/icons/' + opcionMenu + '.png'" 
+                        class="w-4 h-4" 
+                        [alt]="opcionMenu" 
+                        />
+                        <span class="font-semibold capitalize">{{ opcionMenu }}</span>
+                    </div>
+                </mat-select-trigger>
+                
+                <mat-option class="" value="dashboard">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/dashboard.png" class="w-4 h-4" alt="Dashboard" />
+                        <span>Dashboard</span>
+                    </div>
+                </mat-option>
+                <mat-option value="transacciones">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/transacciones.png" class="w-4 h-4" alt="Transacciones" />
+                        <span>Transacciones</span>
+                    </div>
+                </mat-option>
+                <mat-option value="totales">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/totales.png" class="w-4 h-4" alt="Totales" />
+                        <span>Totales</span>
+                    </div>
+                </mat-option>
+                <mat-option value="metas">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/metas.png" class="w-4 h-4" alt="Metas" />
+                        <span>Metas</span>
+                    </div>
+                </mat-option>
+                <mat-option value="analisis">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/analisis.png" class="w-4 h-4" alt="Análisis" />
+                        <span>Análisis</span>
+                    </div>
+                </mat-option>
+                <mat-option value="exportar">
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/exportar.png" class="w-4 h-4" alt="Exportar" />
+                        <span>Exportar</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="hidden md:grid grid-cols-6 text-center bg-gray-200 mt-8 rounded-lg">
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('dashboard')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'dashboard'}">
+            <button (click)="cambiarOpcionMenu('dashboard')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'dashboard'}">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/dashboard.png" alt="">
                 <p class="p-1">Dashboard</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('transacciones')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'transacciones'}">
-                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/transaccion.png" alt="">
+            <button (click)="cambiarOpcionMenu('transacciones')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'transacciones'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/transacciones.png" alt="">
                 <p class="p-1">Transacciones</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('totales')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'totales'}">
-                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/calculadora.png" alt="">
+            <button (click)="cambiarOpcionMenu('totales')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'totales'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/totales.png" alt="">
                 <p class="p-1">Totales</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('metas')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'metas'}">
-                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/meta.png" alt="">
+            <button (click)="cambiarOpcionMenu('metas')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'metas'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/metas.png" alt="">
                 <p class="p-1">Metas</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('analisis')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'analisis'}">
+            <button (click)="cambiarOpcionMenu('analisis')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'analisis'}">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/analisis.png" alt="">
                 <p class="p-1">Análisis</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOPcionMenu('exportar')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'exportar'}">
+            <button (click)="cambiarOpcionMenu('exportar')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'exportar'}">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/exportar.png" alt="">
                 <p class="p-1">Exportar</p>
             </button>

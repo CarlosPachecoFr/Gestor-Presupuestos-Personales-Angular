@@ -5,3 +5,23 @@
 body {
   @apply bg-gray-100;
 }
+
+html, body { height: 100%; }
+.custom-select-panel {
+  background-color: white !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.mat-mdc-select-min-line {
+  font-weight: 600;
+}
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+.mdc-line-ripple {
+  display: none !important;
+  height: 0 !important;
+}
+.mdc-list-item__primary-text {
+  font-weight: 500 !important;
+}

@@ -12,5 +12,6 @@ import { BarraNavegacionComponent } from "../../componentes/home/barra-navegacio
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  opcionMenu: string = 'dashboard';
 
 }

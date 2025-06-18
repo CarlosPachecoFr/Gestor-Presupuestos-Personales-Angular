@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-barra-navegacion',
@@ -12,8 +12,10 @@ export class BarraNavegacionComponent {
 
   constructor() { }
 
+  @Output() mostrarOpcionMenu = new EventEmitter<string>();
+
   cambiarOPcionMenu(opcion: string) {
     this.opcionMenu = opcion;
-    console.log('Opción de menú cambiada a:', this.opcionMenu);
+    this.mostrarOpcionMenu.emit(this.opcionMenu);
   }
 }

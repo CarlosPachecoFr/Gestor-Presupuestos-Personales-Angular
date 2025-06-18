@@ -1,5 +1,25 @@
 <app-tarjetas-datos />
-<app-barra-navegacion />
-<app-formulario-transaccion />
-<app-graficos-transacciones />
-<app-transacciones-recientes />
+<app-barra-navegacion (mostrarOpcionMenu)="opcionMenu = $event" />
+@switch (opcionMenu) {
+    @case ('dashboard') {
+        <app-formulario-transaccion />
+        <app-graficos-transacciones />
+        <app-transacciones-recientes />
+    }
+    @case ('transacciones') {
+        
+    }
+    @case('totales') {
+
+    }
+    @case('metas') {
+
+    }
+    @case('analisis') {
+
+    }
+    @case('exportar') {
+
+    }
+}
+

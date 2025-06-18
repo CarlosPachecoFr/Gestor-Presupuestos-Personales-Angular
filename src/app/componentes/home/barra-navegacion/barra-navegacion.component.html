@@ -1,39 +1,39 @@
 <section class="mx-4 sm:mx-20">
     <div class="grid grid-cols-6 text-center bg-gray-200 mt-8 rounded-lg">
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row rounded-lg">
+            <button (click)="cambiarOPcionMenu('dashboard')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'dashboard'}"   >
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/dashboard.png" alt="">
                 <p class="p-1">Dashboard</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row">
+            <button (click)="cambiarOPcionMenu('transacciones')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'transacciones'}">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/transaccion.png" alt="">
                 <p class="p-1">Transacciones</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row">
-                <img class="w-4 h-4" src="/assets/icons/calculadora.png" alt="">
-                <p>Totales</p>
+            <button (click)="cambiarOPcionMenu('totales')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'totales'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/calculadora.png" alt="">
+                <p class="p-1">Totales</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row">
-                <img class="w-4 h-4" src="/assets/icons/meta.png" alt="">
-                <p>Metas</p>
+            <button (click)="cambiarOPcionMenu('metas')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'metas'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/meta.png" alt="">
+                <p class="p-1">Metas</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row">
-                <img class="w-4 h-4" src="/assets/icons/analisis.png" alt="">
-                <p>Análisis</p>
+            <button (click)="cambiarOPcionMenu('analisis')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'analisis'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/analisis.png" alt="">
+                <p class="p-1">Análisis</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button class="flex flex-row">
-                <img src="" alt="">
-                <p>Exportar</p>
+            <button (click)="cambiarOPcionMenu('exportar')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'exportar'}">
+                <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/exportar.png" alt="">
+                <p class="p-1">Exportar</p>
             </button>
         </div>
     </div>

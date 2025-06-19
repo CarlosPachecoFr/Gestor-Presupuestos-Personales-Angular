@@ -1,0 +1,42 @@
+<section class="bg-white sm:mx-20 mx-4 mt-8 mb-8 rounded-lg border-2 shadow-lg">
+    <div>
+        <div class="p-5">
+            <p class="font-semibold text-xl">Todas las Transacciones</p>
+        </div>
+        @for(transaccion of transacciones; track transaccion.id){
+            <div class="border-2 ml-5 mr-5 mb-5 rounded-lg hover:bg-gray-50">
+            <div class="flex flex-row">
+                @if(transaccion.tipo === 'ingreso'){
+                    <div class="bg-gradient-to-br from-[#E5FCED] to-[#C2F7D5] rounded-full w-8 h-8 flex items-center justify-center m-5">
+                        <img class="w-4 h-4" src="/assets/icons/flechaHaciaArriba.png" alt="">
+                    </div>
+                }
+                @else {
+                    <div class="bg-gradient-to-br from-[#FFE5E5] to-[#FFCCCC] rounded-full w-8 h-8 flex items-center justify-center m-5">
+                        <img class="w-4 h-4" src="/assets/icons/flechaHaciaAbajo.png" alt="">
+                    </div>
+                }
+                <div class="flex flex-col justify-center">
+                    <p class="font-semibold">{{ transaccion.descripcion }}</p>
+                    <div class="flex flex-row space-x-1 sm:space-x-2">
+                        <div class="bg-gray-100 rounded-full">
+                            <p class="text-xs sm:text-sm text-gray-600 px-1 sm:px-2 pt-1 pb-1 font-semibold">{{ transaccion.categoria }}</p>
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-600 pt-1 sm:pl-2">{{ transaccion.fecha_transaccion | date: 'd MMMM y' }}</p>
+                    </div>
+                </div>
+                @if(transaccion.tipo === 'ingreso'){
+                    <div class="ml-auto mr-5 flex items-center">
+                        <p class="font-semibold text-lg text-green-500">+{{ transaccion.cantidad }}€</p>
+                    </div>
+                }
+                @else {
+                    <div class="ml-auto mr-5 flex items-center">
+                        <p class="font-semibold text-lg text-red-500">-{{ transaccion.cantidad }}€</p>
+                    </div>
+                }
+            </div>
+        </div>
+        }
+    </div>
+</section>

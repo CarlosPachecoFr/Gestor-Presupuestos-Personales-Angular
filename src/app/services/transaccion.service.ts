@@ -172,4 +172,13 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerTransacciones(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Transaccion[]>(`${this.apiUrl}/obtenerTransacciones`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

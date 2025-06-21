@@ -3,7 +3,7 @@
         <div class="p-5">
             <p class="font-semibold text-xl">Todas las Transacciones</p>
         </div>
-        @for(transaccion of transacciones; track transaccion.id){
+        @for(transaccion of transaccionesFiltradas; track transaccion.id){
             <div class="border-2 ml-5 mr-5 mb-5 rounded-lg hover:bg-gray-50">
             <div class="flex flex-row">
                 @if(transaccion.tipo === 'ingreso'){

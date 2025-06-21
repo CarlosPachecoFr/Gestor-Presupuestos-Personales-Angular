@@ -10,4 +10,9 @@ import { TodasTransaccionesComponent } from "../../componentes/transacciones/tod
 })
 export class TransaccionesComponent {
 
+  textoFiltrado: string = '';
+
+  filtrarTransaccion(texto: string) {
+    this.textoFiltrado = texto;
+  }
 }

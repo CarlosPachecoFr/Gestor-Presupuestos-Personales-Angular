@@ -18,7 +18,7 @@
                         <label class="font-semibold pb-2">Buscar</label>
                         <div class="relative w-full">
                             <img class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2" src="assets/icons/lupa.png" alt="">
-                            <input class="border-2 rounded-lg p-2 pl-10 w-full" type="text" placeholder="Buscar por descripción..." />
+                            <input class="border-2 rounded-lg p-2 pl-10 w-full" (input)="buscarTransaccion($event)" type="text" placeholder="Buscar por descripción..." />
                         </div>
                     </div>
                     <div class="flex flex-col pr-5 sm:col-span-1">

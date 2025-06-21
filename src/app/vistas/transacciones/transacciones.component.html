@@ -1,2 +1,2 @@
-<app-buscador-transacciones />
-<app-todas-transacciones />
+<app-buscador-transacciones (filtrarTransaccion)="filtrarTransaccion($event)"/>
+<app-todas-transacciones [textoFiltrado]="textoFiltrado"/>

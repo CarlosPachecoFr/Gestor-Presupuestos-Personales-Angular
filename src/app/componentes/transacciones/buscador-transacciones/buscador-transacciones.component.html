@@ -6,7 +6,7 @@
                 <p class="text-lg sm:text-xl font-semibold">Filtros y Búsqueda</p>
             </div>
             <div class="flex">
-                @if(textoActual){
+                @if(textoActual || tipoActual !== 'todo') {
                 <div class="pr-5">
                     <button (click)="limpiarBuscador()" class="flex text-[13px] sm:text-[16px] border-2 rounded-lg p-2 font-semibold items-center gap-2">
                         <img class="w-3 h-3" src="assets/icons/cruz.png" alt="">
@@ -28,12 +28,12 @@
                         <label class="font-semibold pb-2">Buscar</label>
                         <div class="relative w-full">
                             <img class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2" src="assets/icons/lupa.png" alt="">
-                            <input formControlName="texto" class="border-2 rounded-lg p-2 pl-10 w-full" (input)="buscarTransaccion($event)" type="text" placeholder="Buscar por descripción..." />
+                            <input formControlName="textoFiltrado" class="border-2 rounded-lg p-2 pl-10 w-full" (input)="buscarTransaccion($event)" type="text" placeholder="Buscar por descripción..." />
                         </div>
                     </div>
                     <div class="flex flex-col pr-5 sm:col-span-1">
                         <label class="font-semibold pb-2">Tipo</label>
-                        <select class="border-2 rounded-lg p-2" name="" id="">
+                        <select (change)="buscarTransaccion($event)" formControlName="tipo" class="border-2 rounded-lg p-2" name="" id="">
                             <option value="todo">Todos</option>
                             <option value="ingreso">Ingresos</option>
                             <option value="gasto">Gastos</option>

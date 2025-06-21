@@ -17,7 +17,7 @@ registerLocaleData(localeEs);
 export class TodasTransaccionesComponent implements OnChanges {
   transacciones: any[] = [];
   transaccionesFiltradas: any[] = [];
-  @Input() textoFiltrado: string = '';
+  @Input() filtros!: { textoFiltrado: string; tipo: string };
 
   constructor(private transaccionService: TransaccionService) { }
 
@@ -33,21 +33,24 @@ export class TodasTransaccionesComponent implements OnChanges {
     this.transaccionService.obtenerTransacciones().subscribe(transacciones => {
       this.transacciones = transacciones;
       this.transaccionesFiltradas = transacciones;
+      this.filtrarTransacciones();
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['textoFiltrado']) {
+    if (changes['filtros']) {
       this.filtrarTransacciones();
     }
   }
 
   filtrarTransacciones() {
-    if (this.textoFiltrado) {
-      const texto = this.textoFiltrado.toLowerCase();
-      this.transaccionesFiltradas = this.transacciones.filter(transaccion => 
-        transaccion.descripcion.toLowerCase().includes(texto)
-      );
+    if (this.filtros) {
+      const { textoFiltrado, tipo } = this.filtros;
+      this.transaccionesFiltradas = this.transacciones.filter(transaccion => {
+        const coincideTexto = transaccion.descripcion.toLowerCase().includes(textoFiltrado.toLowerCase());
+        const coincideTipo = tipo === 'todo' || transaccion.tipo === tipo;
+        return coincideTexto && coincideTipo; //si retorna true entonces la muestra coincide con el filtro
+      });
     }
     else{
       this.transaccionesFiltradas = [...this.transacciones];

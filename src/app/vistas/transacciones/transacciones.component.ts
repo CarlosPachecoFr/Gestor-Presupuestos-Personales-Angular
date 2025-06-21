@@ -10,9 +10,14 @@ import { TodasTransaccionesComponent } from "../../componentes/transacciones/tod
 })
 export class TransaccionesComponent {
 
-  textoFiltrado: string = '';
+  filtros = {
+    textoFiltrado: '',
+    tipo: 'todo'
+  };
+  
 
-  filtrarTransaccion(texto: string) {
-    this.textoFiltrado = texto;
+  filtrarTransaccion(filtro: { textoFiltrado: string; tipo: string }) {
+    this.filtros = filtro;
+    
   }
 }

@@ -5,20 +5,30 @@
                 <img class="w-5 h-5 sm:w-6 sm:h-6" src="assets/icons/transacciones.png" alt="">
                 <p class="text-lg sm:text-xl font-semibold">Filtros y Búsqueda</p>
             </div>
-            <div class="pr-5">
-                <button class="text-[13px] sm:text-[16px] border-2 rounded-lg p-2 font-semibold">
-                    <p>Más filtros</p>
-                </button>
+            <div class="flex">
+                @if(textoActual){
+                <div class="pr-5">
+                    <button (click)="limpiarBuscador()" class="flex text-[13px] sm:text-[16px] border-2 rounded-lg p-2 font-semibold items-center gap-2">
+                        <img class="w-3 h-3" src="assets/icons/cruz.png" alt="">
+                        <p>Limpiar</p>
+                    </button>
+                </div>
+                }
+                <div class="pr-5">
+                    <button class="text-[13px] sm:text-[16px] border-2 rounded-lg p-2 font-semibold">
+                        <p>Más filtros</p>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="pt-4 pb-5">
-            <form>
+            <form [formGroup]="formularioBuscador">
                 <div class="grid grid-cols-1 sm:grid-cols-5 gap-5">
                     <div class="flex flex-col pr-5 sm:pr-0 sm:col-span-4">
                         <label class="font-semibold pb-2">Buscar</label>
                         <div class="relative w-full">
                             <img class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2" src="assets/icons/lupa.png" alt="">
-                            <input class="border-2 rounded-lg p-2 pl-10 w-full" (input)="buscarTransaccion($event)" type="text" placeholder="Buscar por descripción..." />
+                            <input formControlName="texto" class="border-2 rounded-lg p-2 pl-10 w-full" (input)="buscarTransaccion($event)" type="text" placeholder="Buscar por descripción..." />
                         </div>
                     </div>
                     <div class="flex flex-col pr-5 sm:col-span-1">

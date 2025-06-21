@@ -49,5 +49,8 @@ export class TodasTransaccionesComponent implements OnChanges {
         transaccion.descripcion.toLowerCase().includes(texto)
       );
     }
+    else{
+      this.transaccionesFiltradas = [...this.transacciones];
+    }
   }
 }

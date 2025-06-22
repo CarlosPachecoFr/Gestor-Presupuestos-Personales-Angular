@@ -1,0 +1,44 @@
+<section class="mx-4 sm:mx-20 mt-8">
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-10">
+        <div class="rounded-lg  border-2 border-[#C2F7D5] bg-gradient-to-br from-[#E5FCED] to-[#C2F7D5] hover:shadow-lg transition duration-300 ease-in-out">
+            <div class="flex flex-row pl-5 pt-5 pb-3">
+                <p class="font-semibold text-[#166534]">Ingresos totales</p>
+                <img class="w-15 h-5 ml-auto pr-5" src="/assets/icons/flechaHaciaArriba.png" alt="">
+            </div>
+            <div class="pl-5">
+                <p class="text-3xl font-bold text-[#14532D]">{{totalIngresos}}€</p>
+            </div>
+            <div class="pl-5 pb-5 pt-2">
+                <p class="text-[13px] text-[#16A34A]">Acumulado histórico</p>
+            </div>
+        </div>
+        <div class="rounded-lg border-2 border-[#FECACA] bg-gradient-to-br from-[#FEEAEA] to-[#ffd9d9] hover:shadow-lg transition duration-300 ease-in-out">
+            <div class="flex flex-row pl-5 pt-5 pb-3">
+                <p class="font-semibold text-[#991B1B]">Gastos totales</p>
+                <img class="w-15 h-5 ml-auto pr-5" src="/assets/icons/flechaHaciaAbajo.png" alt="">
+            </div>
+            <div class="pl-5">
+                <p class="text-3xl font-bold text-[#7F1D1D]">{{totalGastos}}€</p>
+            </div>
+            <div class="pl-5 pb-5 pt-2">
+                <p class="text-[13px] text-[#DC2626]">Acumulado histórico</p>
+            </div>
+        </div>
+        <div class="rounded-lg  border-2 border-[#BFDBFE] bg-gradient-to-br from-[#E5F0FE] to-[#c5ddff] hover:shadow-lg transition duration-300 ease-in-out">
+            <div class="flex flex-row pl-5 pt-5 pb-3">
+                <p class="font-semibold text-[#1E40AF]">Balance total</p>
+                <img class="w-15 h-5 ml-auto pr-5" src="/assets/icons/euro.png" alt="">
+            </div>
+            <div class="pl-5">
+                <p class="text-3xl font-bold text-[#14532D]">{{balance}}€</p>
+            </div>
+            <div class="pl-5 pb-5 pt-2">
+                @if (totalIngresos - totalGastos > 0) {
+                    <p class="text-[13px] text-[#4A63EC]">Saldo positivo</p>
+                }
+                @else {
+                    <p class="text-[13px] text-[#4A63EC]">Saldo negativo</p>}
+            </div>
+        </div>
+    </div>
+</section>

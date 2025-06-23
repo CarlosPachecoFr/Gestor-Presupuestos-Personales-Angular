@@ -181,4 +181,22 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerTotalGastosPorCategoria(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerTotalGastosPorCategoria`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  obtenerTotalIngresosPorCategoria(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerTotalIngresosPorCategoria`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

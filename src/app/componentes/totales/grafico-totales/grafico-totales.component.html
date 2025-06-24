@@ -1,7 +1,7 @@
 <section>
     <div>
         @if(mostrarIngresos){
-            <div class="bg-white rounded-lg border-2 p-5 shadow-lg">
+            <div class="bg-white rounded-lg border-2 p-5 shadow-lg h-[430px]">
                 <apx-chart
                     [series]="donutChartOptionsIngresos.series"
                     [chart]="donutChartOptionsIngresos.chart"
@@ -22,7 +22,7 @@
             </div>
         }
         @else {
-            <div class="bg-white rounded-lg border-2 p-5 shadow-lg">
+            <div class="bg-white rounded-lg border-2 p-5 shadow-lg h-[430px]">
                 <apx-chart
                     [series]="donutChartOptionsGastos.series"
                     [chart]="donutChartOptionsGastos.chart"

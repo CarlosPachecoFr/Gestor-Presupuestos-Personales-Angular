@@ -1,20 +1,24 @@
-<section>
+<section >
     <div class="bg-white border-2 rounded-lg shadow-lg h-[430px]">
         <div class="p-5 text-2xl font-semibold">
             <p>Información General</p>
         </div>
         <div class="px-5">
-            <div class="bg-gray-100 p-3 rounded-lg mb-5">
-                <p class="text-[16px] text-gray-600">Total de transacciones: </p>
+            <div class="bg-gray-100 p-3 rounded-lg mb-5 flex justify-between">
+                <p class="text-[16px] text-gray-600">Total de transacciones:</p>
+                <span class="font-semibold">{{nTotalTransacciones}}</span>
             </div>
-            <div class="bg-gray-100 p-3 rounded-lg mb-5">
+            <div class="bg-gray-100 p-3 rounded-lg mb-5 flex justify-between">
                 <p class="text-[16px] text-gray-600">Transacciones de ingresos: </p>
+                <span class="text-green-500 font-semibold">{{nTotalTransaccionesIngresos}}</span>
             </div>
-            <div class="bg-gray-100 p-3 rounded-lg mb-5">
+            <div class="bg-gray-100 p-3 rounded-lg mb-5 flex justify-between">
                 <p class="text-[16px] text-gray-600">Transacciones de gastos: </p>
+                <span class="text-red-500 font-semibold">{{nTotalTransaccionesGastos}}</span>
             </div>
-            <div class="bg-gray-100 p-3 rounded-lg mb-5">
+            <div class="bg-gray-100 p-3 rounded-lg mb-5 flex justify-between">
                 <p class="text-[16px] text-gray-600">Promedio por transaccion: </p>
+                <span class="font-semibold">{{promedioTransaccion}}€</span>
             </div>
         </div>
     </div>

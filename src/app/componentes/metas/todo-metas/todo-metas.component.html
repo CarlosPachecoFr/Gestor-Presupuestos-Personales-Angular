@@ -1,4 +1,4 @@
-<section class="mx:4 sm:mx-20 mt-8">
+<section class="mx:4 sm:mx-20 my-8">
     <div class="bg-white rounded-lg border-2 shadow-lg">
         <div class="flex justify-between p-5">
             <div class="flex items-center gap-2">
@@ -12,43 +12,41 @@
                 </button>
             </div>
         </div>
-        <div class="grid grid-cols-3 p-5">
-            <div class="border-2 rounded-lg">
-                <div class="flex items-center justify-between py-4 px-3">
+        <div class="grid grid-cols-3 p-5 gap-8">
+            <div class="border-2 rounded-lg h-[300px]">
+                <div class="flex items-center justify-between py-4 px-4">
                     <p class="font-semibold text-[17px]">Fondo de Emergencia</p>
                     <div class="rounded-full border-red-500 bg-red-500 w-3 h-3"></div>
                 </div>
-                <div class="flex justify-between py-4 px-3 text-gray-600">
+                <div class="flex justify-between px-4 text-gray-600">
                     <p>8500€</p>
                     <p>15000€</p>
                 </div>
-                <div class="py-4 px-3">
+                <div class="mx-4 mt-3">
                     <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                    <div class="bg-black h-full" [ngStyle]="{ width: porcentaje + '%' }"></div>
+                        <div class="bg-black h-full" [ngStyle]="{ width: porcentaje + '%' }"></div>
                     </div>
                 </div>
-                <div class="flex justify-between py-4 px-3 text-gray-500">
+                <div class="flex justify-between py-4 px-4 text-gray-500">
                     <div class="flex items-center gap-1">
                         <img class="w-4 h-4" src="assets/icons/calendario.png" alt="">
                         <p class="text-[14px]">Vencido</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <img class="w-3 h-3" src="assets/icons/analisis.png" alt=""> <!-- Buscar una imagen de la flecha gris -->
+                    <div class="flex items-center gap-1">
+                        <img class="w-4 h-4" src="assets/icons/flechaHaciaArribaGris.png" alt="">
                         <p class="text-[14px]">55%</p>
                     </div>
                 </div>
-                <div class="bg-gray-100 my-4 mx-3 py-2 rounded-lg">
+                <div class="bg-gray-100 mx-4 py-2 rounded-lg">
                     <p class="text-[13px] text-gray-600 p-1 pl-2">Faltan 6500€ para completar</p>
                 </div>
-                <div class="border-2 rounded-lg m-3">
+                <div class="border-2 rounded-lg m-4 mt-7">
                     <button class="flex items-center justify-center gap-2 w-full p-2">
                         <img class="w-4 h-4" src="assets/icons/hucha.png" alt="">
                         <p class="font-semibold">Añadir dinero</p>
                     </button>
                 </div>
             </div>
-            <div></div>
-            <div></div>
         </div>
     </div>
 </section>

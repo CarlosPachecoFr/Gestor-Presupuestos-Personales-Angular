@@ -42,7 +42,7 @@
                         <p class="text-[13px] text-gray-600 p-1 pl-2">Faltan {{meta.diferencia_objetivo}}€ para completar</p>
                     </div>
                     <div class="border-2 rounded-lg m-4 mt-7">
-                        <button (click)="cambiarModalDinero()" class="flex items-center justify-center gap-2 w-full p-2 hover:bg-gray-100 transition duration-300 ease-in-out">
+                        <button (click)="cambiarModalDinero(meta.id)" class="flex items-center justify-center gap-2 w-full p-2 hover:bg-gray-100 transition duration-300 ease-in-out">
                             <img class="w-4 h-4" src="assets/icons/hucha.png" alt="">
                             <p class="font-semibold">Añadir dinero</p>
                         </button>
@@ -130,8 +130,8 @@
                                 }
                             </div>
                             <div class="grid grid-cols-5 my-3 p-4 gap-2">
-                                <button class="col-span-4 bg-black w-full rounded-lg p-2 hover:bg-opacity-80 transition duration-300 ease-in-out" [ngClass]="{'bg-opacity-60 cursor-not-allowed': formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid}">
-                                    <p class="text-white font-semibold">Añadir </p>
+                                <button (click)="anadirCantidadMeta()" class="col-span-4 bg-black w-full rounded-lg p-2 hover:bg-opacity-80 transition duration-300 ease-in-out" [ngClass]="{'bg-opacity-60 cursor-not-allowed hover:bg-none': formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid}">
+                                    <p class="text-white font-semibold">Añadir {{cantidadAnadirValor || 0}}€</p>
                                 </button>
                                 <button type="button" class="col-span-1 border-2 rounded-lg p-2 hover:bg-gray-100 transition duration-300 ease-in-out" (click)="cambiarModalDinero()">
                                     <p class="font-semibold">Cancelar</p>

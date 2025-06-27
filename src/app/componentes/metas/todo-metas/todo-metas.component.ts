@@ -18,6 +18,8 @@ export class TodoMetasComponent {
   abrirModalMeta: boolean = false;
   abrirModalDinero: boolean = false;
   formularioDinero: FormGroup;
+  cantidadAnadirValor: number = 0;
+  metaId: number = 0;
 
   constructor(private metaService: MetaService, private formBuilder: FormBuilder){
     this.formularioMeta = this.formBuilder.group({
@@ -80,6 +82,10 @@ export class TodoMetasComponent {
       };
     });
   });
+
+  this.formularioDinero.get('cantidad_añadir')?.valueChanges.subscribe(valor => {
+      this.cantidadAnadirValor = valor;
+    });
   }
 
   cambiarEstadoModalMeta(){
@@ -87,9 +93,16 @@ export class TodoMetasComponent {
     this.formularioMeta.reset();
   }
 
-  cambiarModalDinero(){
-    this.abrirModalDinero = !this.abrirModalDinero;
-    this.formularioDinero.reset();
+  cambiarModalDinero(metaId?: number){
+    if (metaId !== undefined) {
+      // Abrir modal y guardar id de la meta
+      this.metaId = metaId;
+      this.abrirModalDinero = true;
+    } else {
+      // Cerrar modal y limpiar estado
+      this.abrirModalDinero = false;
+      this.formularioDinero.reset();
+    }
   }
 
   async crearMeta(){
@@ -102,6 +115,19 @@ export class TodoMetasComponent {
     }
     else{
       this.formularioMeta.markAllAsTouched();
+    }
+  }
+
+  async anadirCantidadMeta(){
+    if(this.formularioDinero.valid){
+      const cantidad_añadir = this.formularioDinero.get('cantidad_añadir')?.value;
+      await firstValueFrom(this.metaService.añadirCantidadMeta(cantidad_añadir,this.metaId));
+      this.abrirModalDinero = false;
+      this.formularioDinero.reset();
+      this.cargarDatos();
+    }
+    else{
+      this.formularioDinero.markAllAsTouched();
     }
   }
 }

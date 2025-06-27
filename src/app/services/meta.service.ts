@@ -37,4 +37,13 @@ export class MetaService {
       }
     });
   }
+
+  añadirCantidadMeta(cantidad_añadir: number, id: number){
+    const token = localStorage.getItem('token');
+    return this.http.patch(`${this.apiUrl}/añadirCantidadMeta?cantidad_añadir=${cantidad_añadir}&id=${id}`, null,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

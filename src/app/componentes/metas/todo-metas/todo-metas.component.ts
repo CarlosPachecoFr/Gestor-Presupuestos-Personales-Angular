@@ -1,18 +1,29 @@
 import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { MetaService } from '../../../services/meta.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-metas',
-  imports: [NgStyle],
+  imports: [NgStyle,ReactiveFormsModule],
   templateUrl: './todo-metas.component.html',
   styleUrl: './todo-metas.component.css'
 })
 export class TodoMetasComponent {
 
   metas: any = [];
+  formularioMeta: FormGroup;
+  abrirModalMeta: boolean = false;
 
-  constructor(private metaService: MetaService){}
+  constructor(private metaService: MetaService, private formBuilder: FormBuilder){
+    this.formularioMeta = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      cantidad_objetivo: ['', [Validators.required, Validators.min(0.01)]],
+      fecha_finalizacion: ['', [Validators.required, fechaNoPasada]]
+    })
+  }
 
   ngOnInit(){
     this.cargarDatos();
@@ -65,4 +76,33 @@ export class TodoMetasComponent {
     });
   });
   }
+
+  cambiarEstadoModalMeta(){
+    this.abrirModalMeta = !this.abrirModalMeta;
+    this.formularioMeta.reset();
+  }
+
+  async crearMeta(){
+    if(this.formularioMeta.valid){
+      const meta = this.formularioMeta.value;
+      await firstValueFrom(this.metaService.crearMeta(meta));
+      this.abrirModalMeta = false;
+      this.formularioMeta.reset();
+      this.cargarDatos();
+    }
+    else{
+      this.formularioMeta.markAllAsTouched();
+    }
+  }
+}
+
+function fechaNoPasada(control: AbstractControl): ValidationErrors | null {
+  const fechaIngresada = new Date(control.value);
+  const hoy = new Date();
+
+  // Limpiar la hora para comparar solo fechas
+  hoy.setHours(0, 0, 0, 0);
+  fechaIngresada.setHours(0, 0, 0, 0);
+
+  return fechaIngresada < hoy ? { fechaPasada: true } : null;
 }

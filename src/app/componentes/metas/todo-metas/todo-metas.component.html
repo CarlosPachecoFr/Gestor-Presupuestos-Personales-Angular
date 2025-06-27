@@ -42,7 +42,7 @@
                         <p class="text-[13px] text-gray-600 p-1 pl-2">Faltan {{meta.diferencia_objetivo}}€ para completar</p>
                     </div>
                     <div class="border-2 rounded-lg m-4 mt-7">
-                        <button class="flex items-center justify-center gap-2 w-full p-2 hover:bg-gray-100 transition duration-300 ease-in-out">
+                        <button (click)="cambiarModalDinero()" class="flex items-center justify-center gap-2 w-full p-2 hover:bg-gray-100 transition duration-300 ease-in-out">
                             <img class="w-4 h-4" src="assets/icons/hucha.png" alt="">
                             <p class="font-semibold">Añadir dinero</p>
                         </button>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="flex flex-col px-4 my-3">
                                 <label class="font-semibold text-[14px] py-1">Cantidad objetivo</label>
-                                <input class="border-2 rounded-lg p-1 pl-2" placeholder="0.00" formControlName="cantidad_objetivo" type="text">
+                                <input class="border-2 rounded-lg p-1 pl-2" placeholder="0.00" formControlName="cantidad_objetivo" type="number">
                                 @if (formularioMeta.get('cantidad_objetivo')?.touched && formularioMeta.get('cantidad_objetivo')?.invalid) {
                                     @if(formularioMeta.get('cantidad_objetivo')?.errors?.['required']) {
                                         <span class="text-[#ff0000] text-[14px]">El campo no puede estar vacío</span>
@@ -105,5 +105,42 @@
                 </div>
             </div>
         }
+        <!-- Modal para ingresar dinero -->
+         @if(abrirModalDinero){
+            <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white rounded-lg border-2 w-[500px]">
+                    <div class="flex justify-between p-4">
+                        <p class="text-lg font-semibold">Añadir Dinero a la Meta</p>
+                        <button (click)="cambiarModalDinero()">
+                            <img class="w-4 h-4" src="assets/icons/cruz.png" alt="">
+                        </button>
+                    </div>
+                    <div>
+                        <form [formGroup]="formularioDinero">
+                            <div class="flex flex-col px-4">
+                                <label class="font-semibold text-[14px] py-1">Cantidad a añadir</label>
+                                <input formControlName="cantidad_añadir" class="border-2 rounded-lg p-1 pl-2" placeholder="0.00" type="number">
+                                @if (formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid) {
+                                    @if(formularioDinero.get('cantidad_añadir')?.errors?.['required']) {
+                                        <span class="text-[#ff0000] text-[14px]">El campo no puede estar vacío</span>
+                                    }
+                                    @if(formularioDinero.get('cantidad_añadir')?.errors?.['min']) {
+                                        <span class="text-[#ff0000] text-[14px]">El valor mínimo es 0.01</span>
+                                    }
+                                }
+                            </div>
+                            <div class="grid grid-cols-5 my-3 p-4 gap-2">
+                                <button class="col-span-4 bg-black w-full rounded-lg p-2 hover:bg-opacity-80 transition duration-300 ease-in-out" [ngClass]="{'bg-opacity-60 cursor-not-allowed': formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid}">
+                                    <p class="text-white font-semibold">Añadir </p>
+                                </button>
+                                <button type="button" class="col-span-1 border-2 rounded-lg p-2 hover:bg-gray-100 transition duration-300 ease-in-out" (click)="cambiarModalDinero()">
+                                    <p class="font-semibold">Cancelar</p>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         }
     </div>
 </section>

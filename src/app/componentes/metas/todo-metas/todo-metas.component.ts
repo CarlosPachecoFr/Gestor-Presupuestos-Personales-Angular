@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { MetaService } from '../../../services/meta.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-metas',
-  imports: [NgStyle,ReactiveFormsModule],
+  imports: [NgStyle,ReactiveFormsModule, NgClass],
   templateUrl: './todo-metas.component.html',
   styleUrl: './todo-metas.component.css'
 })
@@ -16,12 +16,17 @@ export class TodoMetasComponent {
   metas: any = [];
   formularioMeta: FormGroup;
   abrirModalMeta: boolean = false;
+  abrirModalDinero: boolean = false;
+  formularioDinero: FormGroup;
 
   constructor(private metaService: MetaService, private formBuilder: FormBuilder){
     this.formularioMeta = this.formBuilder.group({
       nombre: ['', Validators.required],
       cantidad_objetivo: ['', [Validators.required, Validators.min(0.01)]],
       fecha_finalizacion: ['', [Validators.required, fechaNoPasada]]
+    })
+    this.formularioDinero = this.formBuilder.group({
+      cantidad_añadir: ['', [Validators.required, Validators.min(0.01)]]
     })
   }
 
@@ -80,6 +85,11 @@ export class TodoMetasComponent {
   cambiarEstadoModalMeta(){
     this.abrirModalMeta = !this.abrirModalMeta;
     this.formularioMeta.reset();
+  }
+
+  cambiarModalDinero(){
+    this.abrirModalDinero = !this.abrirModalDinero;
+    this.formularioDinero.reset();
   }
 
   async crearMeta(){

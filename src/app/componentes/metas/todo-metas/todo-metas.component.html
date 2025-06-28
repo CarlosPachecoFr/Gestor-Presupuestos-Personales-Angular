@@ -1,18 +1,18 @@
-<section class="mx:4 sm:mx-20 my-8">
-    <div class="bg-white rounded-lg border-2 shadow-lg">
-        <div class="flex justify-between p-5">
+<section>
+    <div class="bg-white rounded-lg border-2 shadow-lg mx-4 my-8 sm:mx-20">
+        <div class="sm:flex justify-between p-5">
             <div class="flex items-center gap-2">
                 <img class="w-6 h-6" src="assets/icons/metas.png" alt="">
                 <p class="text-xl font-semibold">Metas de Ahorro</p>
             </div>
-            <div>
+            <div class="mt-4 sm:mt-0">
                 <button (click)="cambiarEstadoModalMeta()" class="bg-black flex items-center p-2 rounded-lg gap-2 hover:bg-opacity-80 transition duration-300 ease-in-out">
                     <img class="w-5 h-5" src="assets/icons/masBlanco.png" alt="">
-                    <p class="text-white">Nueva Meta</p>
+                    <p class="text-white text-[13px] sm:text-[16px]">Nueva Meta</p>
                 </button>
             </div>
         </div>
-        <div class="grid grid-cols-3 p-5 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-5 gap-8">
             @for(meta of metas; track meta.id){
                 <div class="border-2 rounded-lg h-[290px] hover:shadow-lg transition duration-300 ease-in-out">
                     <div class="flex items-center justify-between py-4 px-4">
@@ -53,7 +53,7 @@
         <!-- Modal para Crear Meta -->
         @if(abrirModalMeta){
             <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white rounded-lg border-2 w-[500px]">
+                <div class="bg-white rounded-lg border-2 w-[500px] mx-4">
                     <div class="flex justify-between p-4">
                         <p class="text-lg font-semibold">Crear Nueva Meta de Ahorro</p>
                         <button (click)="cambiarEstadoModalMeta()">
@@ -108,7 +108,7 @@
         <!-- Modal para ingresar dinero -->
          @if(abrirModalDinero){
             <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white rounded-lg border-2 w-[500px]">
+                <div class="bg-white rounded-lg border-2 w-[500px] mx-4">
                     <div class="flex justify-between p-4">
                         <p class="text-lg font-semibold">Añadir Dinero a la Meta</p>
                         <button (click)="cambiarModalDinero()">
@@ -129,11 +129,11 @@
                                     }
                                 }
                             </div>
-                            <div class="grid grid-cols-5 my-3 p-4 gap-2">
-                                <button (click)="anadirCantidadMeta()" class="col-span-4 bg-black w-full rounded-lg p-2 hover:bg-opacity-80 transition duration-300 ease-in-out" [ngClass]="{'bg-opacity-60 cursor-not-allowed hover:bg-none': formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid}">
+                            <div class="grid grid-cols-1 sm:grid-cols-5 my-3 p-4 gap-2">
+                                <button (click)="anadirCantidadMeta()" class="sm:col-span-4 bg-black w-full rounded-lg p-2 hover:bg-opacity-80 transition duration-300 ease-in-out" [ngClass]="{'bg-opacity-60 cursor-not-allowed hover:bg-none': formularioDinero.get('cantidad_añadir')?.touched && formularioDinero.get('cantidad_añadir')?.invalid}">
                                     <p class="text-white font-semibold">Añadir {{cantidadAnadirValor || 0}}€</p>
                                 </button>
-                                <button type="button" class="col-span-1 border-2 rounded-lg p-2 hover:bg-gray-100 transition duration-300 ease-in-out" (click)="cambiarModalDinero()">
+                                <button type="button" class="sm:col-span-1 border-2 rounded-lg p-2 hover:bg-gray-100 transition duration-300 ease-in-out" (click)="cambiarModalDinero()">
                                     <p class="font-semibold">Cancelar</p>
                                 </button>
                             </div>

@@ -1,1 +1,20 @@
-<p>graficos-analisis works!</p>
+<section>
+    <div class="grid grid-cols-2 mx-4 sm:mx-20 my-8 gap-8">
+        @if (chartOptions) {
+            <div class="bg-white rounded-lg border-2">
+            <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [xaxis]="chartOptions.xaxis"
+                [title]="chartOptions.title"
+                [stroke]="chartOptions.stroke"
+                [markers]="chartOptions.markers"
+                [grid]="chartOptions.grid">
+            </apx-chart>
+        </div>
+        }
+        <div>
+
+        </div>
+    </div>
+</section>

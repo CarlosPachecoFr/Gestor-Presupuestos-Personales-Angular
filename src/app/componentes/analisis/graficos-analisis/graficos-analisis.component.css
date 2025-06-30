@@ -1,0 +1,5 @@
+/* Al hacer hover: rellena con el color del borde (verde o rojo) */
+.apexcharts-marker:hover {
+  fill: currentColor !important;
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexGrid, NgApexchartsModule, ApexStroke, ApexMarkers } from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexGrid, NgApexchartsModule, ApexStroke, ApexMarkers, ApexTooltip, ApexDataLabels } from 'ng-apexcharts';
 import { TransaccionService } from '../../../services/transaccion.service';
 
 export type ChartOptions = {
@@ -12,6 +12,18 @@ export type ChartOptions = {
   grid: ApexGrid;
 };
 
+export type BarChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+  stroke: ApexStroke;
+  markers: ApexMarkers;
+  grid: ApexGrid;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
+};
+
 @Component({
   selector: 'app-graficos-analisis',
   imports: [NgApexchartsModule],
@@ -21,11 +33,18 @@ export type ChartOptions = {
 export class GraficosAnalisisComponent {
 
   public chartOptions!: ChartOptions;
+  public barChartOptions!: BarChartOptions;
 
   constructor(private transaccionService: TransaccionService){}
 
   ngOnInit(){
     this.cargarDatosLineChart();
+    this.cargarDatosBarChart();
+
+    this.transaccionService.transaccionesActualizadas$.subscribe(() => {
+      this.cargarDatosLineChart();
+      this.cargarDatosBarChart();
+    })
   }
 
   cargarDatosLineChart(){
@@ -88,8 +107,69 @@ export class GraficosAnalisisComponent {
             fontWeight: 'bold',
           }
         }
-        }
-      })
-    })
+        };
+      });
+    });
   }
+
+  cargarDatosBarChart() {
+  this.transaccionService.obtenerGastosSemanales().subscribe((gastosSemanales: any[]) => {
+    const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    const dataMap = new Map<string, number>();
+
+    gastosSemanales.forEach(([dia, cantidad]) => {
+      dataMap.set(dia, cantidad);
+    });
+
+    const gastos = diasSemana.map(dia => dataMap.get(dia) ?? 0);
+
+    this.barChartOptions = {
+      series: [{
+        name: 'Gastos',
+        data: gastos,
+        color: '#3B82F6'
+      }],
+      xaxis: {
+        categories: diasSemana
+      },
+      dataLabels: {
+        enabled: false 
+      },
+      tooltip: {
+        y: {
+          formatter: (value: number) => `${value.toFixed(2)} €`
+        }
+      },
+      chart: {
+        type: 'bar',
+        height: 350,
+        toolbar: {
+          show: false
+        }
+      },
+      stroke: {
+        width: 0
+      },
+      markers: {
+        size: 0
+      },
+      grid: {
+        show: true,
+        borderColor: '#e0e0e0',
+        strokeDashArray: 4,
+        xaxis: { lines: { show: false } },
+        yaxis: { lines: { show: true } }
+      },
+      title: {
+        text: 'Gastos por Día de la Semana',
+        margin: 50,
+        offsetX: 10,
+        style: {
+          fontSize: '20px',
+          fontWeight: 'bold',
+        }
+      }
+    };
+  });
+}
 }

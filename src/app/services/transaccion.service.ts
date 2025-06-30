@@ -199,4 +199,13 @@ export class TransaccionService {
       }
     });
   }
+
+  obtenerGastosSemanales(){
+    const token = localStorage.getItem('token');
+    return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosSemanales`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 }

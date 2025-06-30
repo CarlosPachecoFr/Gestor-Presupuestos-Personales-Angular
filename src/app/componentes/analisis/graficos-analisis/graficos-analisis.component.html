@@ -1,7 +1,7 @@
 <section>
     <div class="grid grid-cols-2 mx-4 sm:mx-20 my-8 gap-8">
         @if (chartOptions) {
-            <div class="bg-white rounded-lg border-2">
+            <div class="bg-white rounded-lg border-2 shadow-lg">
             <apx-chart
                 [series]="chartOptions.series"
                 [chart]="chartOptions.chart"
@@ -13,8 +13,20 @@
             </apx-chart>
         </div>
         }
-        <div>
-
-        </div>
+        @if (barChartOptions) {
+            <div class="bg-white rounded-lg border-2 shadow-lg">
+                <apx-chart
+                    [series]="barChartOptions.series"
+                    [chart]="barChartOptions.chart"
+                    [xaxis]="barChartOptions.xaxis"
+                    [stroke]="barChartOptions.stroke"
+                    [markers]="barChartOptions.markers"
+                    [grid]="barChartOptions.grid"
+                    [title]="barChartOptions.title"
+                    [tooltip]="barChartOptions.tooltip"
+                    [dataLabels]="barChartOptions.dataLabels">
+                </apx-chart>
+            </div>
+        }
     </div>
 </section>

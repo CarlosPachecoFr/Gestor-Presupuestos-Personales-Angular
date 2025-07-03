@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { blob } from 'node:stream/consumers';
 
 export interface Transaccion {
   id: number,
@@ -203,6 +204,16 @@ export class TransaccionService {
   obtenerGastosSemanales(){
     const token = localStorage.getItem('token');
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosSemanales`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  exportarArchivo(periodo: string, formato: string){
+    const token = localStorage.getItem('token');
+    return this.http.get(`${this.apiUrl}/exportarArchivo?periodo=${periodo}&formato=${formato}`, {
+      responseType: 'blob',
       headers: {
         Authorization: `Bearer ${token}`
       }

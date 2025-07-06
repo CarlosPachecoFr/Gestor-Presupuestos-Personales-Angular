@@ -1,0 +1,6 @@
+{
+    "workbench.colorCustomizations": {
+        "editor.background": "#1a1a2e",        // Fondo más oscuro
+        "sideBar.background": "#121622", 
+    }
+}

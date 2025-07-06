@@ -54,37 +54,37 @@
     </div>
     <div class="hidden md:grid grid-cols-6 text-center bg-gray-200 mt-8 rounded-lg">
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('dashboard')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'dashboard'}">
+            <button (click)="cambiarOpcionMenu('dashboard')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40 opacity-100': opcionMenu === 'dashboard', 'opacity-50': opcionMenu !== 'dashboard' }">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/dashboard.png" alt="">
                 <p class="p-1">Dashboard</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('transacciones')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'transacciones'}">
+            <button (click)="cambiarOpcionMenu('transacciones')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40 opacity-100': opcionMenu === 'transacciones', 'opacity-50': opcionMenu !== 'transacciones' }">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/transacciones.png" alt="">
                 <p class="p-1">Transacciones</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('totales')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'totales'}">
+            <button (click)="cambiarOpcionMenu('totales')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'totales', 'opacity-50': opcionMenu !== 'totales' }">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/totales.png" alt="">
                 <p class="p-1">Totales</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('metas')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'metas'}">
+            <button (click)="cambiarOpcionMenu('metas')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40 opacity-100': opcionMenu === 'metas', 'opacity-50': opcionMenu !== 'metas' }">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/metas.png" alt="">
                 <p class="p-1">Metas</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('analisis')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'analisis'}">
+            <button (click)="cambiarOpcionMenu('analisis')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40 opacity-100': opcionMenu === 'analisis', 'opacity-50': opcionMenu !== 'analisis'}">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/analisis.png" alt="">
                 <p class="p-1">Análisis</p>
             </button>
         </div>
         <div class="flex justify-center items-center p-2">
-            <button (click)="cambiarOpcionMenu('exportar')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40': opcionMenu === 'exportar'}">
+            <button (click)="cambiarOpcionMenu('exportar')" class="flex flex-row rounded-lg justify-center" [ngClass]="{'bg-white w-40 opacity-100': opcionMenu === 'exportar', 'opacity-50': opcionMenu !== 'exportar' }">
                 <img class="w-4 h-4 mt-2 ml-1" src="/assets/icons/exportar.png" alt="">
                 <p class="p-1">Exportar</p>
             </button>

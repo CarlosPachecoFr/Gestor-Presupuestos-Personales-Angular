@@ -20,6 +20,7 @@ export class TodoMetasComponent {
   formularioDinero: FormGroup;
   cantidadAnadirValor: number = 0;
   metaId: number = 0;
+  animarModal = false;
 
   constructor(private metaService: MetaService, private formBuilder: FormBuilder){
     this.formularioMeta = this.formBuilder.group({
@@ -88,22 +89,39 @@ export class TodoMetasComponent {
     });
   }
 
-  cambiarEstadoModalMeta(){
-    this.abrirModalMeta = !this.abrirModalMeta;
+  cambiarEstadoModalMeta() {
+  if (!this.abrirModalMeta) {
+    // Abrir modal con animación
+    this.abrirModalMeta = true;
     this.formularioMeta.reset();
+    setTimeout(() => {
+      this.animarModal = true;
+    }, 10); // pequeño delay para permitir render antes de animar
+  } else {
+    // Cerrar con animación antes de quitar del DOM
+    this.animarModal = false;
+    setTimeout(() => {
+      this.abrirModalMeta = false;
+      this.formularioMeta.reset();
+    }, 300); // esperar que termine animación
   }
+}
 
-  cambiarModalDinero(metaId?: number){
-    if (metaId !== undefined) {
-      // Abrir modal y guardar id de la meta
-      this.metaId = metaId;
-      this.abrirModalDinero = true;
-    } else {
-      // Cerrar modal y limpiar estado
+  cambiarModalDinero(metaId?: number) {
+  if (metaId !== undefined) {
+    this.metaId = metaId;
+    this.abrirModalDinero = true;
+    setTimeout(() => {
+      this.animarModal = true;
+    }, 10);
+  } else {
+    this.animarModal = false;
+    setTimeout(() => {
       this.abrirModalDinero = false;
       this.formularioDinero.reset();
-    }
+    }, 300); // Esperar a que termine la animación
   }
+}
 
   async crearMeta(){
     if(this.formularioMeta.valid){

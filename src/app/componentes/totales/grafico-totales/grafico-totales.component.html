@@ -1,7 +1,11 @@
 <section>
-    <div>
-        @if(mostrarIngresos){
-            <div class="bg-white rounded-lg border-2 p-5 shadow-lg h-[430px]">
+    <div class="bg-white rounded-lg border-2 p-5 shadow sm:h-[500px]">
+        <div class="text-2xl font-semibold mb-5">
+            <p>Resumen por Categorías</p>
+        </div>
+        <div>
+            @if(mostrarIngresos){
+            <div class="border-2 rounded-lg p-2">
                 <apx-chart
                     [series]="donutChartOptionsIngresos.series"
                     [chart]="donutChartOptionsIngresos.chart"
@@ -22,7 +26,7 @@
             </div>
         }
         @else {
-            <div class="bg-white rounded-lg border-2 p-5 shadow-lg h-[430px]">
+            <div class="border-2 rounded-lg p-2">
                 <apx-chart
                     [series]="donutChartOptionsGastos.series"
                     [chart]="donutChartOptionsGastos.chart"
@@ -42,5 +46,6 @@
                 </div>
             </div>
         }
+        </div>
     </div>
 </section>

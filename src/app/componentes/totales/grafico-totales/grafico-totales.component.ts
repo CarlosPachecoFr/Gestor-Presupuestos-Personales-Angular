@@ -54,7 +54,7 @@ export class GraficoTotalesComponent {
           text: "Gastos Totales por Categoría",
           margin: 10,
           style: {
-            fontSize: '20px',
+            fontSize: '19px',
             fontWeight: 'bold',
           }
         },
@@ -115,7 +115,7 @@ export class GraficoTotalesComponent {
           text: "Ingresos Totales por Categoría",
           margin: 10,
           style: {
-            fontSize: '20px',
+            fontSize: '19px',
             fontWeight: 'bold',
           }
         },

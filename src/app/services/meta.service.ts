@@ -46,4 +46,8 @@ export class MetaService {
       }
     });
   }
+
+  obtenerMetaPorId(id: number){
+    return this.http.get<Meta>(`${this.apiUrl}/obtenerMetaPorId?id=${id}`)
+  }
 }

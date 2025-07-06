@@ -121,7 +121,7 @@ export class TransaccionService {
     });
   }
 
-  crearTransaccion(transaccion: Transaccion) {
+  crearTransaccion(transaccion: Partial<Transaccion>) {
     const token = localStorage.getItem('token');
     return this.http.post<Transaccion>(`${this.apiUrl}/crearTransaccion`, transaccion, {
       headers: {

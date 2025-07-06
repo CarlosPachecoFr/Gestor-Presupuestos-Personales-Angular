@@ -4,6 +4,7 @@ import { MetaService } from '../../../services/meta.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Transaccion, TransaccionService } from '../../../services/transaccion.service';
 
 @Component({
   selector: 'app-todo-metas',
@@ -22,7 +23,7 @@ export class TodoMetasComponent {
   metaId: number = 0;
   animarModal = false;
 
-  constructor(private metaService: MetaService, private formBuilder: FormBuilder){
+  constructor(private metaService: MetaService, private formBuilder: FormBuilder, private transaccionService: TransaccionService){
     this.formularioMeta = this.formBuilder.group({
       nombre: ['', Validators.required],
       cantidad_objetivo: ['', [Validators.required, Validators.min(0.01)]],
@@ -140,6 +141,15 @@ export class TodoMetasComponent {
     if(this.formularioDinero.valid){
       const cantidad_añadir = this.formularioDinero.get('cantidad_añadir')?.value;
       await firstValueFrom(this.metaService.añadirCantidadMeta(cantidad_añadir,this.metaId));
+      const meta = await firstValueFrom(this.metaService.obtenerMetaPorId(this.metaId));
+      const transaccion = {
+        tipo: 'gasto',
+        cantidad: this.formularioDinero.get('cantidad_añadir')?.value,
+        categoria: 'ahorro',
+        descripcion: meta.nombre
+      }
+      await firstValueFrom(this.transaccionService.crearTransaccion(transaccion));
+      this.transaccionService.notificarCambio();
       this.abrirModalDinero = false;
       this.formularioDinero.reset();
       this.cargarDatos();

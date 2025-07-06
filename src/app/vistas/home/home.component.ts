@@ -7,10 +7,11 @@ import { TotalesComponent } from "../totales/totales.component";
 import { MetasComponent } from "../metas/metas.component";
 import { AnalisisComponent } from "../analisis/analisis.component";
 import { ExportarComponent } from "../exportar/exportar.component";
+import { FooterComponent } from "../../componentes/comunes/footer/footer.component";
 
 @Component({
   selector: 'app-home',
-  imports: [DashboardComponent, TarjetasDatosComponent, BarraNavegacionComponent, TransaccionesComponent, TotalesComponent, MetasComponent, AnalisisComponent, ExportarComponent],
+  imports: [DashboardComponent, TarjetasDatosComponent, BarraNavegacionComponent, TransaccionesComponent, TotalesComponent, MetasComponent, AnalisisComponent, ExportarComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

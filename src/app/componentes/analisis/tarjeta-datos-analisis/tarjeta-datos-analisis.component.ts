@@ -23,6 +23,10 @@ export class TarjetaDatosAnalisisComponent {
     this.transaccionService.transaccionesActualizadas$.subscribe(() => {
       this.cargarDatos();
     });
+
+    this.transaccionService.alertasActualizadas$.subscribe(() => {
+      this.cargarDatos();
+    });
   }
 
   cargarDatos(){

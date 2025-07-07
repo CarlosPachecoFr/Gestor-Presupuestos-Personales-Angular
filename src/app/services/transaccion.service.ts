@@ -23,6 +23,9 @@ export class TransaccionService {
   private transaccionesActualizadas = new Subject<void>();
   transaccionesActualizadas$ = this.transaccionesActualizadas.asObservable();
 
+  private alertasActualizadasSource = new Subject<void>();
+  alertasActualizadas$ = this.alertasActualizadasSource.asObservable();
+
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -30,6 +33,10 @@ export class TransaccionService {
 
   notificarCambio() {
     this.transaccionesActualizadas.next();
+  }
+
+  notificarActualizacionAlertas() {
+    this.alertasActualizadasSource.next();
   }
 
   private getToken(): string | null {

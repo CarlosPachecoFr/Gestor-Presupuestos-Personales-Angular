@@ -42,5 +42,6 @@ export class DatosAlertasComponent {
     ignoradas.push(idAlerta);
     localStorage.setItem('alertasIgnoradas', JSON.stringify(ignoradas));
     this.transaccionesFiltradas = this.transaccionesFiltradas.filter((t: Transaccion) => t.id !== idAlerta);
+    this.transaccionService.notificarActualizacionAlertas();
   }
 }

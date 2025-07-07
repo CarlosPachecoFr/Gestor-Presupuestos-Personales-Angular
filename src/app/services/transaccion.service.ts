@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { blob } from 'node:stream/consumers';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface Transaccion {
   id: number,
@@ -24,15 +24,23 @@ export class TransaccionService {
   transaccionesActualizadas$ = this.transaccionesActualizadas.asObservable();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   notificarCambio() {
     this.transaccionesActualizadas.next();
   }
 
+  private getToken(): string | null {
+  if (isPlatformBrowser(this.platformId)) {
+    return localStorage.getItem('token');
+  }
+    return null;
+  }
+
   obtenerTotalIngresosPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerTotalIngresosPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -41,7 +49,7 @@ export class TransaccionService {
   }
 
   obtenerTotalGastosPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerTotalGastosPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -50,7 +58,7 @@ export class TransaccionService {
   }
 
   obtenerBalancePorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerBalancePorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -59,7 +67,7 @@ export class TransaccionService {
   }
 
   obtenerTasaAhorroPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerTasaAhorroPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -68,7 +76,7 @@ export class TransaccionService {
   }
 
   obtenerIngresosMensualPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerIngresosMensualPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -77,7 +85,7 @@ export class TransaccionService {
   }
 
   obtenerGastosMensualPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerGastosMensualPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -86,7 +94,7 @@ export class TransaccionService {
   }
 
   obtenerBalanceMensualPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerBalanceMensualPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -95,7 +103,7 @@ export class TransaccionService {
   }
 
   obtenerTasaAhorroMensualPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/obtenerTasaAhorroMensualPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -104,7 +112,7 @@ export class TransaccionService {
   }
 
   variacionIngresosMesAnteriorPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/variacionIngresosMesAnteriorPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -113,7 +121,7 @@ export class TransaccionService {
   }
 
   variacionGastosMesAnteriorPorId(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<number>(`${this.apiUrl}/variacionGastosMesAnteriorPorId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -122,7 +130,7 @@ export class TransaccionService {
   }
 
   crearTransaccion(transaccion: Partial<Transaccion>) {
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.post<Transaccion>(`${this.apiUrl}/crearTransaccion`, transaccion, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -130,7 +138,7 @@ export class TransaccionService {
     });
   }
   obtenerUltimasTransacciones(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Transaccion[]>(`${this.apiUrl}/obtenerUltimasTransacciones`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -139,7 +147,7 @@ export class TransaccionService {
   }
 
   obtenerIngresosUltimosMeses(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerIngresosUltimosMeses`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -148,7 +156,7 @@ export class TransaccionService {
   }
 
   obtenerGastosUltimosMeses(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosUltimosMeses`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -157,7 +165,7 @@ export class TransaccionService {
   }
 
   obtenerGastosPorCategoria(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosPorCategoria`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -166,7 +174,7 @@ export class TransaccionService {
   }
 
   obtenerIngresosPorCategoria(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerIngresosPorCategoria`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -175,7 +183,7 @@ export class TransaccionService {
   }
 
   obtenerTransacciones(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Transaccion[]>(`${this.apiUrl}/obtenerTransacciones`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -184,7 +192,7 @@ export class TransaccionService {
   }
 
   obtenerTotalGastosPorCategoria(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerTotalGastosPorCategoria`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -193,7 +201,7 @@ export class TransaccionService {
   }
 
   obtenerTotalIngresosPorCategoria(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerTotalIngresosPorCategoria`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -202,7 +210,7 @@ export class TransaccionService {
   }
 
   obtenerGastosSemanales(){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get<Object[]>(`${this.apiUrl}/obtenerGastosSemanales`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -211,7 +219,7 @@ export class TransaccionService {
   }
 
   exportarArchivo(periodo: string, formato: string){
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     return this.http.get(`${this.apiUrl}/exportarArchivo?periodo=${periodo}&formato=${formato}`, {
       responseType: 'blob',
       headers: {

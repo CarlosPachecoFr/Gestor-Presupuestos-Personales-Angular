@@ -35,7 +35,7 @@ export class FormularioTransaccionComponent {
       const transaccion = this.formularioTransaccion.value;
       await firstValueFrom(this.transaccionService.crearTransaccion(transaccion));
       this.transaccionService.notificarCambio();
-      this.formularioTransaccion.reset();
+      this.formularioTransaccion.reset({tipo: 'ingreso'});
     }
     else {
       this.formularioTransaccion.markAllAsTouched();

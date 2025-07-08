@@ -1,7 +1,6 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
 
 export interface Meta {
   id: number,
@@ -19,19 +18,10 @@ export class MetaService {
 
   private apiUrl = environment.apiUrl + '/metas';
 
-  constructor(private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
-
-  private getToken(): string | null {
-  if (isPlatformBrowser(this.platformId)) {
-    return localStorage.getItem('token');
-  }
-    return null;
-  }
+  constructor(private http: HttpClient) { }
 
   crearMeta(meta: Meta){
-    const token = this.getToken();
+    const token = localStorage.getItem('token');
     return this.http.post<Meta>(`${this.apiUrl}/crearMeta`, meta, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -40,7 +30,7 @@ export class MetaService {
   }
 
   obtenerMetasUsuarioId(){
-    const token = this.getToken();
+    const token = localStorage.getItem('token');
     return this.http.get<Meta[]>(`${this.apiUrl}/obtenerMetasUsuarioId`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -49,7 +39,7 @@ export class MetaService {
   }
 
   añadirCantidadMeta(cantidad_añadir: number, id: number){
-    const token = this.getToken();
+    const token = localStorage.getItem('token');
     return this.http.patch(`${this.apiUrl}/añadirCantidadMeta?cantidad_añadir=${cantidad_añadir}&id=${id}`, null,{
       headers: {
         Authorization: `Bearer ${token}`

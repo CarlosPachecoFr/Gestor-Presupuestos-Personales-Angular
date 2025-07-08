@@ -25,7 +25,7 @@ export class FormularioTransaccionComponent {
     this.formularioTransaccion = this.formBuilder.group({
       tipo: ['ingreso'],
       cantidad: ['', [Validators.required, Validators.min(0.01)]],
-      categoria: [''],
+      categoria: ['', Validators.required],
       descripcion: ['', Validators.required]
     })
   }
@@ -57,7 +57,12 @@ export class FormularioTransaccionComponent {
             setTimeout(() => {
               this.registroExitoso = null;
               this.formularioVisible = true;
-              this.formularioTransaccion.reset({tipo: 'ingreso'});
+              this.formularioTransaccion.reset({
+                tipo: 'ingreso',
+                cantidad: '',
+                categoria: '',
+                descripcion: ''
+              });
               this.cdRef.detectChanges();
             }, 3000);  
           } catch (error) {
@@ -66,7 +71,12 @@ export class FormularioTransaccionComponent {
             this.formularioVisible = false;
             this.registroExitoso = false;
             this.iniciandoDesvanecimiento = false;
-            this.formularioTransaccion.reset({tipo: 'ingreso'});
+            this.formularioTransaccion.reset({
+              tipo: 'ingreso',
+              cantidad: '',
+              categoria: '',
+              descripcion: ''
+            });
             this.cdRef.detectChanges();
 
             setTimeout(() => {

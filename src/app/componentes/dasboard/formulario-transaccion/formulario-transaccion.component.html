@@ -1,76 +1,96 @@
-<section class="flex items-center justify-center flex-col mt-8 mx-4 sm:mx-20">
-    <div class="bg-white w-full flex flex-col rounded-lg border-2 shadow-lg">
-        <div class="p-5 flex flex-row">
-            <img class="w-6 h-7 pt-1" src="/assets/icons/masNegro.png" alt="">
-            <p class="text-xl font-semibold pl-1">Añadir Nueva Transacción</p>
-        </div>
-        <form [formGroup]="formularioTransaccion">
-            <div class="grid grid-cols-1 sm:grid-cols-2">
-                <div class="flex flex-col pl-5 pr-5">
-                    <label class="font-semibold pb-2">Tipo</label>
-                    <select name="tipo" class="rounded-lg border-2 p-2" (change)="cambiarTipo($event)" formControlName="tipo">
-                        <option class="text-green-500" value="ingreso">💰Ingreso</option>
-                        <option class="text-red-500" value="gasto">💸Gasto</option>
-                    </select>
+<section class="relative flex items-center justify-center flex-col mt-8 mx-4 sm:mx-20">
+  <div class="bg-white w-full flex flex-col rounded-lg border-2 shadow-lg relative overflow-hidden min-h-[500px]">
+    <div class="p-5 flex flex-row">
+      <img class="w-6 h-7 pt-1" src="/assets/icons/masNegro.png" alt="">
+      <p class="text-xl font-semibold pl-1">Añadir Nueva Transacción</p>
+    </div>
+    @if(registroExitoso !== null || cargando){
+        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm">
+        @if(cargando){
+           <app-loader /> 
+        }
+        @if(registroExitoso === true){
+            <div class="flex flex-col items-center">
+                <div class="tick-container">
+                    <div class="tick"></div>
                 </div>
-                <div class="flex flex-col pl-5 pt-5 sm:pt-0 sm:pl-0 pr-5">
-                    <label class="font-semibold pb-2">Cantidad</label>
-                    <input class="rounded-lg border-2 p-2" type="number" placeholder="0.00" formControlName="cantidad">
-                    @if (formularioTransaccion.get('cantidad')?.touched && formularioTransaccion.get('cantidad')?.invalid) {
-                        @if(formularioTransaccion.get('cantidad')?.errors?.['required']) {
+                <p class="mt-2 text-green-700 font-semibold">Tu transacción se ha enviado correctamente</p>
+            </div>
+        }
+        @if(registroExitoso === false){
+            <div class="flex flex-col items-center">
+                <div class="cross-container">
+                    <div class="cross-line"></div>
+                <div class="cross-line"></div>
+                </div>
+                <p class="mt-2 text-red-600 font-semibold">Error al enviar. Inténtalo más tarde</p>
+            </div>
+        }
+        </div>
+    }
+    @if(formularioVisible && !cargando){
+        <div [ngClass]="{'desvanecer-formulario': iniciandoDesvanecimiento}" class="relative z-0">
+            <form [formGroup]="formularioTransaccion" [ngClass]="{'formulario-reaparece': formularioVisible}" class="p-5 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="flex flex-col">
+                        <label class="font-semibold pb-2">Tipo</label>
+                        <select name="tipo" class="rounded-lg border-2 p-2" (change)="cambiarTipo($event)" formControlName="tipo">
+                            <option value="ingreso">💰Ingreso</option>
+                            <option value="gasto">💸Gasto</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="font-semibold pb-2">Cantidad</label>
+                        <input class="rounded-lg border-2 p-2" type="number" placeholder="0.00" formControlName="cantidad">
+                        @if(formularioTransaccion.get('cantidad')?.touched && formularioTransaccion.get('cantidad')?.invalid){
+                            @if(formularioTransaccion.get('cantidad')?.errors?.['required']){
+                                <span class="text-[#ff0000]">El campo no puede estar vacío</span>
+                            }
+                            @if(formularioTransaccion.get('cantidad')?.errors?.['min']){
+                                <span class="text-[#ff0000]">El valor mínimo es 0.01</span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label class="font-semibold pb-2">Categoría</label>
+                        @if(valorTipo == 'ingreso'){
+                            <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
+                                <option value="" disabled selected hidden>Seleccionar categoría</option>
+                                <option value="salario">Salario</option>
+                                <option value="alquiler">Alquiler</option>
+                                <option value="bonos">Bonos</option>
+                                <option value="otros">Otros ingresos</option>
+                            </select>
+                        }
+                        @else {
+                            <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
+                                <option value="" disabled selected hidden>Seleccionar categoría</option>
+                                <option value="ropa">Ropa</option>
+                                <option value="comida">Comida</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="vivienda">Vivienda</option>
+                                <option value="otros">Otros gastos</option>
+                            </select>
+                        }    
+                </div>
+                <div class="flex flex-col">
+                    <label class="font-semibold pb-2">Descripción</label>
+                    <input class="border-2 rounded-lg pb-10 pt-1 pl-2" type="text" placeholder="Descripción de la transacción..." formControlName="descripcion">
+                    @if(formularioTransaccion.get('descripcion')?.touched && formularioTransaccion.get('descripcion')?.invalid){
+                        @if(formularioTransaccion.get('descripcion')?.errors?.['required']){
                             <span class="text-[#ff0000]">El campo no puede estar vacío</span>
                         }
-                        @if(formularioTransaccion.get('cantidad')?.errors?.['min']) {
-                            <span class="text-[#ff0000]">El valor mínimo es 0.01</span>
-                        }
                     }
                 </div>
-            </div>
-            <div class="grid grid-cols-1 pl-5 pr-5 pt-5">
-                <label class="font-semibold pb-2">Categoría</label>
-                @if(valorTipo == 'ingreso'){
-                    <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
-                        <option value="" disabled selected hidden>Seleccionar categoría</option>
-                        <option value="salario">Salario</option>
-                        <option value="alquiler">Alquiler</option>
-                        <option value="bonos">Bonos</option>
-                        <option value="otros">Otros ingresos</option>
-                    </select>
-                }
-                @else {
-                    <select name="categoria" class="rounded-lg border-2 p-2" formControlName="categoria">
-                        <option value="" disabled selected hidden>Seleccionar categoría</option>
-                        <option value="ropa">Ropa</option>
-                        <option value="comida">Comida</option>
-                        <option value="transporte">Transporte</option>
-                        <option value="vivienda">Vivienda</option>
-                        <option value="otros">Otros gastos</option>
-                    </select>
-                }    
-            </div>
-            <div class="grid grid-cols-1 pl-5 pr-5 pt-5">
-                <label class="font-semibold pb-2">Descripción</label>
-                <input class="border-2 rounded-lg flex pb-10 pt-1 pl-2" type="text" placeholder="Descripción de la transacción..." formControlName="descripcion">
-                @if(formularioTransaccion.get('descripcion')?.touched && formularioTransaccion.get('descripcion')?.invalid) {
-                    @if(formularioTransaccion.get('descripcion')?.errors?.['required']) {
-                        <span class="text-[#ff0000]">El campo no puede estar vacío</span>
-                    }
-                }
-            </div>
-            <div class="p-5">
-            @if(valorTipo == 'ingreso'){
-                <button (click)="crearTransaccion()" class=" flex flex-row w-full bg-green-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
-                    <img class="w-7 h-7" src="/assets/icons/masBlanco.png" alt="">
-                    <p class="text-white font-semibold pl-2">Añadir Ingreso</p>
-                </button>
-            }
-            @else {
-                <button (click)="crearTransaccion()" class="flex flex-row w-full bg-red-600 items-center justify-center pt-2 pb-2 rounded-lg hover:bg-red-700 transition duration-300 ease-in-out">  
-                    <img class="w-7 h-7" src="/assets/icons/masBlanco.png" alt="">
-                    <p class="text-white font-semibold pl-2">Añadir Gasto</p>
-                </button>
-            }
-            </div>
-        </form>
-    </div>
+                <div>
+                    <button (click)="crearTransaccion()" [ngClass]="{'bg-green-600 hover:bg-green-700': valorTipo == 'ingreso','bg-red-600 hover:bg-red-700': valorTipo == 'gasto'}" class="flex flex-row w-full text-white font-semibold items-center justify-center pt-2 pb-2 rounded-lg transition duration-300 ease-in-out">
+                        <img class="w-7 h-7" src="/assets/icons/masBlanco.png" alt="">
+                        <p class="pl-2">Añadir {{ valorTipo === 'ingreso' ? 'Ingreso' : 'Gasto' }}</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+    }
+  </div>
 </section>

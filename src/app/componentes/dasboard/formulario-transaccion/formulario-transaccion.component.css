@@ -1,0 +1,56 @@
+.tick-container, .cross-container {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.tick {
+  width: 20px;
+  height: 40px;
+  border-bottom: 5px solid green;
+  border-right: 5px solid green;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+.cross-line {
+  position: absolute;
+  width: 50px;
+  height: 5px;
+  background-color: red;
+  top: 28px;
+  left: 5px;
+}
+
+.cross-line:first-child {
+  transform: rotate(45deg);
+}
+
+.cross-line:last-child {
+  transform: rotate(-45deg);
+}
+
+.desvanecer-formulario {
+  animation: fadeOut 0.4s forwards;
+}
+
+.formulario-reaparece {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

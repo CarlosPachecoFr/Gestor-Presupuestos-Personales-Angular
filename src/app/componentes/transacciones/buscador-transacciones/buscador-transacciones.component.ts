@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-buscador-transacciones',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgClass],
   templateUrl: './buscador-transacciones.component.html',
   styleUrl: './buscador-transacciones.component.css'
 })
@@ -12,8 +12,13 @@ export class BuscadorTransaccionesComponent {
 
   @Output() filtrarTransaccion = new EventEmitter<{textoFiltrado: string, tipo: string}>();
 
+  @Output() aplicarFiltros = new EventEmitter<string>();
+
   textoActual: string = '';
   tipoActual: string = 'todo';
+  abrirModalFiltros: boolean = false;
+  botonActivo: number = 0; // 0 = ninguno, 1 = menor, 2 = entre, 3 = mayor
+  valorBoton: string = '';
 
   formularioBuscador: FormGroup;
 
@@ -36,9 +41,34 @@ export class BuscadorTransaccionesComponent {
   limpiarBuscador() {
     this.textoActual = '';
     this.tipoActual = 'todo';
+    this.valorBoton = '';
+    this.botonActivo = 0;
     this.formularioBuscador.reset({textoFiltrado: '', tipo: 'todo'});
     this.filtrarTransaccion.emit({textoFiltrado: '', tipo: 'todo'});
+    this.aplicarFiltros.emit('');
     this.cdRef.detectChanges();
   }
 
+  cambiarEstadoModal(){
+    this.abrirModalFiltros = !this.abrirModalFiltros;
+  }
+  
+  tocarBoton(numero: number){
+    this.botonActivo = numero;
+
+    if(numero === 1){
+      this.valorBoton = 'menor';
+    } else if(numero === 2){
+      this.valorBoton = 'entre';
+    } else if(numero === 3){
+      this.valorBoton = 'mayor';
+    } else {
+      this.valorBoton = '';
+    }
+  }
+
+  aplicarFiltro(){
+    this.aplicarFiltros.emit(this.valorBoton);
+    this.cambiarEstadoModal();
+  }
 }

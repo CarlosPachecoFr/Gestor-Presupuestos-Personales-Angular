@@ -22,6 +22,7 @@ export class TodoMetasComponent {
   cantidadAnadirValor: number = 0;
   metaId: number = 0;
   animarModal = false;
+  error: string = '';
 
   constructor(private metaService: MetaService, private formBuilder: FormBuilder, private transaccionService: TransaccionService){
     this.formularioMeta = this.formBuilder.group({
@@ -85,9 +86,15 @@ export class TodoMetasComponent {
     });
   });
 
-  this.formularioDinero.get('cantidad_añadir')?.valueChanges.subscribe(valor => {
+  this.formularioDinero.get('cantidad_añadir')?.valueChanges.subscribe(async valor => {
       this.cantidadAnadirValor = valor;
-    });
+
+      const balance = await firstValueFrom(this.transaccionService.obtenerBalancePorId());
+      
+      if (valor && balance >= valor) {
+        this.error = '';
+      }
+        });
   }
 
   cambiarEstadoModalMeta() {
@@ -109,6 +116,7 @@ export class TodoMetasComponent {
 }
 
   cambiarModalDinero(metaId?: number) {
+  this.error = "";
   if (metaId !== undefined) {
     this.metaId = metaId;
     this.abrirModalDinero = true;
@@ -120,6 +128,7 @@ export class TodoMetasComponent {
     setTimeout(() => {
       this.abrirModalDinero = false;
       this.formularioDinero.reset();
+      this.error = "";
     }, 300); // Esperar a que termine la animación
   }
 }
@@ -140,6 +149,12 @@ export class TodoMetasComponent {
   async anadirCantidadMeta(){
     if(this.formularioDinero.valid){
       const cantidad_añadir = this.formularioDinero.get('cantidad_añadir')?.value;
+      const balance = await firstValueFrom(this.transaccionService.obtenerBalancePorId());
+      if(balance < cantidad_añadir){
+        console.log(balance);
+        this.error = "No tienes suficiente balance para añadir esta cantidad";
+        return; //Detener el proceso
+      }
       await firstValueFrom(this.metaService.añadirCantidadMeta(cantidad_añadir,this.metaId));
       const meta = await firstValueFrom(this.metaService.obtenerMetaPorId(this.metaId));
       const transaccion = {

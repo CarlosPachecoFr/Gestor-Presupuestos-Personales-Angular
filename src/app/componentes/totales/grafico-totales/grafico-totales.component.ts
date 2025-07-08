@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
-import { ApexChart, ApexTitleSubtitle, ApexResponsive, ApexDataLabels, ApexLegend, ApexTooltip, ApexPlotOptions, NgApexchartsModule } from 'ng-apexcharts';
+import {
+  ApexChart,
+  ApexTitleSubtitle,
+  ApexResponsive,
+  ApexDataLabels,
+  ApexLegend,
+  ApexTooltip,
+  ApexPlotOptions,
+  NgApexchartsModule
+} from 'ng-apexcharts';
+
 import { TransaccionService } from '../../../services/transaccion.service';
 
 export type DonutChartOptions = {
@@ -38,17 +48,25 @@ export class GraficoTotalesComponent {
     });
   }
 
-  cargarDatosDonutGastos(){
+  private sanitizeNumberArray(arr: any[]): number[] {
+    return arr.map(val => (val === null || val === undefined) ? 0 : val);
+  }
+
+  private sanitizeStringArray(arr: any[]): string[] {
+    return arr.map(val => (val === null || val === undefined) ? '' : val.toString());
+  }
+
+  cargarDatosDonutGastos() {
     this.transaccionService.obtenerTotalGastosPorCategoria().subscribe(data => {
-      const porcentajes = data.map((item: any) => item[1]);
-      const categorias = data.map((item: any) => item[0]);
-      
+      const porcentajes = this.sanitizeNumberArray(data.map((item: any) => item[1]));
+      const categorias = this.sanitizeStringArray(data.map((item: any) => item[0]));
+
       this.donutChartOptionsGastos = {
         series: porcentajes,
-        chart:{
+        chart: {
           type: 'donut',
           height: 350,
-        }, 
+        },
         labels: categorias,
         title: {
           text: "Gastos Totales por Categoría",
@@ -60,14 +78,14 @@ export class GraficoTotalesComponent {
         },
         dataLabels: {
           enabled: true,
-          formatter: (val:number) => val.toFixed(1) + '%'
+          formatter: (val: number) => val.toFixed(1) + '%'
         },
         tooltip: {
           y: {
             formatter: (val: number) => `${val.toFixed(1)} €`
           }
         },
-        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        colors: ['#f93333', '#f99633', '#f3f933', '#6cf933', '#33b1f9', '#c633f9', '#f933e7'],
         legend: {
           position: 'right',
           offsetY: 50,
@@ -81,35 +99,35 @@ export class GraficoTotalesComponent {
         },
         responsive: [
           {
-          breakpoint: 640,
-          options: {
-            title: {
-              style: {
-                fontSize: '16px',
+            breakpoint: 640,
+            options: {
+              title: {
+                style: {
+                  fontSize: '16px',
+                }
+              },
+              legend: {
+                offsetY: 20,
+                fontSize: '10px',
               }
-            },
-            legend: {
-              offsetY: 20,
-              fontSize: '10px',
             }
           }
-        }
-      ]
+        ]
       }
     })
   }
 
-  cargarDatosDonutIngresos(){
+  cargarDatosDonutIngresos() {
     this.transaccionService.obtenerTotalIngresosPorCategoria().subscribe(data => {
-      const porcentajes = data.map((item: any) => item[1]);
-      const categorias = data.map((item: any) => item[0]);
-      
+      const porcentajes = this.sanitizeNumberArray(data.map((item: any) => item[1]));
+      const categorias = this.sanitizeStringArray(data.map((item: any) => item[0]));
+
       this.donutChartOptionsIngresos = {
         series: porcentajes,
-        chart:{
+        chart: {
           type: 'donut',
           height: 350,
-        }, 
+        },
         labels: categorias,
         title: {
           text: "Ingresos Totales por Categoría",
@@ -121,14 +139,14 @@ export class GraficoTotalesComponent {
         },
         dataLabels: {
           enabled: true,
-          formatter: (val:number) => val.toFixed(1) + '%'
+          formatter: (val: number) => val.toFixed(1) + '%'
         },
         tooltip: {
           y: {
             formatter: (val: number) => `${val.toFixed(1)} €`
           }
         },
-        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        colors: ['#f93333', '#f99633', '#f3f933', '#6cf933', '#33b1f9', '#c633f9', '#f933e7'],
         legend: {
           position: 'right',
           offsetY: 50,

@@ -33,12 +33,11 @@ export class GraficosTransaccionesComponent {
   public chartOptions!: ChartOptions;
   public donutChartOptionsGastos!: DonutChartOptions;
   public donutChartOptionsIngresos!: DonutChartOptions;
-  mostrarIngresos: boolean =  true;
+  mostrarIngresos: boolean = true;
 
-  constructor(private transaccionService: TransaccionService) {
-  }
+  constructor(private transaccionService: TransaccionService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cargarDatosArea();
     this.cargarDatosDonutGastos();
     this.cargarDatosDonutIngresos();
@@ -49,78 +48,93 @@ export class GraficosTransaccionesComponent {
     });
   }
 
-  cargarDatosArea(){
-    this.transaccionService.obtenerIngresosUltimosMeses().subscribe(ingresosData => {
-    this.transaccionService.obtenerGastosUltimosMeses().subscribe(gastosData => {
-
-      const ingresos = ingresosData.map((item: any) => item[1]);
-      const gastos = gastosData.map((item: any) => item[1]);
-      const meses = ingresosData.map((item: any) => item[0]);
-
-      this.chartOptions = {
-        series: [
-          {
-            name: 'Ingresos',
-            data: ingresos,
-            color: '#5DCFA9'
-          },
-          {
-            name: 'Gastos',
-            data: gastos,
-            color: '#f93333'
-          }
-        ],
-        xaxis: {
-          categories: meses
-        },
-        chart: {
-          type: 'area',
-          height: 400,
-          stacked: false,
-          toolbar: {
-            show: false
-          }
-        },
-        title: {
-          text: 'Ingresos vs Gastos - Últimos 6 meses',
-          margin: 50,
-          offsetX: 10,
-          style: {
-            fontSize: '20px',
-            fontWeight: 'bold',
-          }
-        },
-        responsive: [
-          {
-            breakpoint: 640,
-            options: {
-              title: {
-                style: {
-                  fontSize: '16px',
-                }
-              },
-              legend: {
-                fontSize: '10px',
-              }
-            }
-          }
-        ]
-      };
-
-    });
-  });
+  private sanitizeNumberArray(arr: any[]): number[] {
+    return arr.map(val => (val === null || val === undefined) ? 0 : val);
   }
 
-  cargarDatosDonutGastos(){
+  private sanitizeStringArray(arr: any[]): string[] {
+    return arr.map(val => (val === null || val === undefined) ? '' : val.toString());
+  }
+
+  cargarDatosArea() {
+    this.transaccionService.obtenerIngresosUltimosMeses().subscribe(ingresosData => {
+      this.transaccionService.obtenerGastosUltimosMeses().subscribe(gastosData => {
+
+        const ingresosRaw = ingresosData.map((item: any) => item[1]);
+        const gastosRaw = gastosData.map((item: any) => item[1]);
+        const mesesRaw = ingresosData.map((item: any) => item[0]);
+
+        const ingresos = this.sanitizeNumberArray(ingresosRaw);
+        const gastos = this.sanitizeNumberArray(gastosRaw);
+        const meses = this.sanitizeStringArray(mesesRaw);
+
+        this.chartOptions = {
+          series: [
+            {
+              name: 'Ingresos',
+              data: ingresos,
+              color: '#5DCFA9'
+            },
+            {
+              name: 'Gastos',
+              data: gastos,
+              color: '#f93333'
+            }
+          ],
+          xaxis: {
+            categories: meses
+          },
+          chart: {
+            type: 'area',
+            height: 400,
+            stacked: false,
+            toolbar: {
+              show: false
+            }
+          },
+          title: {
+            text: 'Ingresos vs Gastos - Últimos 6 meses',
+            margin: 50,
+            offsetX: 10,
+            style: {
+              fontSize: '20px',
+              fontWeight: 'bold',
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 640,
+              options: {
+                title: {
+                  style: {
+                    fontSize: '16px',
+                  }
+                },
+                legend: {
+                  fontSize: '10px',
+                }
+              }
+            }
+          ]
+        };
+
+      });
+    });
+  }
+
+  cargarDatosDonutGastos() {
     this.transaccionService.obtenerGastosPorCategoria().subscribe(data => {
-      const porcentajes = data.map((item: any) => item[1]);
-      const categorias = data.map((item: any) => item[0]);
-      
+      const porcentajesRaw = data.map((item: any) => item[1]);
+      const categoriasRaw = data.map((item: any) => item[0]);
+
+      const porcentajes = this.sanitizeNumberArray(porcentajesRaw);
+      const categorias = this.sanitizeStringArray(categoriasRaw);
+
       this.donutChartOptionsGastos = {
         series: porcentajes,
-        chart:{
+        chart: {
           type: 'donut',
-        }, 
+        },
         labels: categorias,
         title: {
           text: "Gastos Mensuales por Categoría",
@@ -132,14 +146,14 @@ export class GraficosTransaccionesComponent {
         },
         dataLabels: {
           enabled: true,
-          formatter: (val:number) => val.toFixed(1) + '%'
+          formatter: (val: number) => val.toFixed(1) + '%'
         },
         tooltip: {
           y: {
             formatter: (val: number) => `${val.toFixed(1)} €`
           }
         },
-        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        colors: ['#f93333', '#f99633', '#f3f933', '#6cf933', '#33b1f9', '#c633f9', '#f933e7'],
         legend: {
           position: 'right',
           offsetY: 50,
@@ -153,34 +167,37 @@ export class GraficosTransaccionesComponent {
         },
         responsive: [
           {
-          breakpoint: 640,
-          options: {
-            title: {
-              style: {
-                fontSize: '16px',
+            breakpoint: 640,
+            options: {
+              title: {
+                style: {
+                  fontSize: '16px',
+                }
+              },
+              legend: {
+                offsetY: 20,
+                fontSize: '10px',
               }
-            },
-            legend: {
-              offsetY: 20,
-              fontSize: '10px',
             }
           }
-        }
-      ]
+        ]
       }
     })
   }
 
-  cargarDatosDonutIngresos(){
+  cargarDatosDonutIngresos() {
     this.transaccionService.obtenerIngresosPorCategoria().subscribe(data => {
-      const porcentajes = data.map((item: any) => item[1]);
-      const categorias = data.map((item: any) => item[0]);
-      
+      const porcentajesRaw = data.map((item: any) => item[1]);
+      const categoriasRaw = data.map((item: any) => item[0]);
+
+      const porcentajes = this.sanitizeNumberArray(porcentajesRaw);
+      const categorias = this.sanitizeStringArray(categoriasRaw);
+
       this.donutChartOptionsIngresos = {
         series: porcentajes,
-        chart:{
+        chart: {
           type: 'donut'
-        }, 
+        },
         labels: categorias,
         title: {
           text: "Ingresos Mensuales por Categoría",
@@ -192,14 +209,14 @@ export class GraficosTransaccionesComponent {
         },
         dataLabels: {
           enabled: true,
-          formatter: (val:number) => val.toFixed(1) + '%'
+          formatter: (val: number) => val.toFixed(1) + '%'
         },
         tooltip: {
           y: {
             formatter: (val: number) => `${val.toFixed(1)} €`
           }
         },
-        colors: ['#f93333','#f99633','#f3f933','#6cf933','#33b1f9','#c633f9','#f933e7'],
+        colors: ['#f93333', '#f99633', '#f3f933', '#6cf933', '#33b1f9', '#c633f9', '#f933e7'],
         legend: {
           position: 'right',
           offsetY: 50,
@@ -228,8 +245,8 @@ export class GraficosTransaccionesComponent {
       }
     })
   }
-  
-  cambiarGrafico(){
+
+  cambiarGrafico() {
     this.mostrarIngresos = !this.mostrarIngresos;
   }
 }

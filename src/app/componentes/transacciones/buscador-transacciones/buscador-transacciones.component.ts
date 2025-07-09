@@ -19,6 +19,7 @@ export class BuscadorTransaccionesComponent {
   abrirModalFiltros: boolean = false;
   botonActivo: number = 0; // 0 = ninguno, 1 = menor, 2 = entre, 3 = mayor
   valorBoton: string = '';
+  animarModal: boolean = false;
 
   formularioBuscador: FormGroup;
 
@@ -50,7 +51,18 @@ export class BuscadorTransaccionesComponent {
   }
 
   cambiarEstadoModal(){
-    this.abrirModalFiltros = !this.abrirModalFiltros;
+    if(!this.abrirModalFiltros){
+      this.abrirModalFiltros = true;
+      setTimeout(() => {
+        this.animarModal = true;
+      }, 10);
+    }
+    else{
+      this.animarModal = false;
+      setTimeout(() => {
+        this.abrirModalFiltros = false;
+      }, 300); 
+    }
   }
   
   tocarBoton(numero: number){

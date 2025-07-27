@@ -50,8 +50,8 @@ export class GraficosAnalisisComponent {
   cargarDatosLineChart(){
     this.transaccionService.obtenerIngresosUltimosMeses().subscribe(ingresosData => {
       this.transaccionService.obtenerGastosUltimosMeses().subscribe(gastosData => {
-        const ingresos = ingresosData.map((item: any) => item[1]);
-        const gastos = gastosData.map((item: any) => item[1]);
+        const ingresos = ingresosData.map((item: any) => item[2]);
+        const gastos = gastosData.map((item: any) => item[2]);
         const meses = ingresosData.map((item: any) => item[0]);
 
         this.chartOptions = {
@@ -117,7 +117,7 @@ export class GraficosAnalisisComponent {
     const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     const dataMap = new Map<string, number>();
 
-    gastosSemanales.forEach(([dia, cantidad]) => {
+    gastosSemanales.forEach(([dia, dia_num,cantidad]) => {
       dataMap.set(dia, cantidad);
     });
 

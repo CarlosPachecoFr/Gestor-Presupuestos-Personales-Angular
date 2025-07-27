@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexResponsive, ApexDataLabels, ApexLegend, ApexTooltip, ApexPlotOptions } from 'ng-apexcharts';
+import { NgApexchartsModule, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexTitleSubtitle, ApexResponsive, ApexDataLabels, ApexLegend, ApexTooltip, ApexPlotOptions,ApexStroke, ApexFill } from 'ng-apexcharts';
 import { TransaccionService } from '../../../services/transaccion.service';
 
 export type ChartOptions = {
@@ -8,6 +8,8 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
   responsive: ApexResponsive[];
+  stroke: ApexStroke;
+  fill: ApexFill;
 };
 
 export type DonutChartOptions = {
@@ -60,8 +62,8 @@ export class GraficosTransaccionesComponent {
     this.transaccionService.obtenerIngresosUltimosMeses().subscribe(ingresosData => {
       this.transaccionService.obtenerGastosUltimosMeses().subscribe(gastosData => {
 
-        const ingresosRaw = ingresosData.map((item: any) => item[1]);
-        const gastosRaw = gastosData.map((item: any) => item[1]);
+        const ingresosRaw = ingresosData.map((item: any) => item[2]);
+        const gastosRaw = gastosData.map((item: any) => item[2]);
         const mesesRaw = ingresosData.map((item: any) => item[0]);
 
         const ingresos = this.sanitizeNumberArray(ingresosRaw);
@@ -90,6 +92,23 @@ export class GraficosTransaccionesComponent {
             stacked: false,
             toolbar: {
               show: false
+            }
+          },
+          stroke: {
+            curve: 'smooth',
+            width: 2
+          },
+          fill: {
+            type: 'gradient', // Cambiar a 'gradient' para un efecto más típico en gráficos de área
+            gradient: {
+              shade: 'light',
+              type: 'vertical',
+              shadeIntensity: 0.5,
+              gradientToColors: ['#5DCFA9', '#f93333'], // Colores finales del gradiente
+              inverseColors: false,
+              opacityFrom: 0.7, // Opacidad inicial
+              opacityTo: 0.2,   // Opacidad final
+              stops: [0, 100]
             }
           },
           title: {

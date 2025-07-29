@@ -41,5 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Ignorar todos los archivos de entorno
-/src/environments/environment*.ts
+# Ignorar archivos de entorno sensibles
+/src/environments/environment.ts
+/src/environments/environment.prod.ts

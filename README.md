@@ -2,14 +2,14 @@
 
 ## Descripción
 
-**Gestor de Presupuestos Personales** es una aplicación web desarrollada con **Angular** que permite a los usuarios gestionar sus finanzas personales de manera eficiente. Con esta herramienta, puedes añadir ingresos y gastos, establecer presupuestos y visualizar reportes para tener un mejor control de tus finanzas. El frontend está dockerizado y depende de un backend basado en microservicios, disponible en el repositorio [Gestor-Presupuestos-Personales-Microservicios](https://github.com/CarlosPachecoFr/Gestor-Presupuestos-Personales-Microservicios).
+**Gestor de Presupuestos Personales** es una aplicación web desarrollada con **Angular** que permite a los usuarios gestionar sus finanzas personales de manera eficiente. Con esta herramienta, puedes añadir ingresos y gastos, establecer metas financieras (por ejemplo, ahorrar para comprar un coche) y visualizar reportes para tener un mejor control de tus finanzas. El frontend está dockerizado y depende de un backend basado en microservicios, disponible en el repositorio [Gestor-Presupuestos-Personales-Microservicios](https://github.com/CarlosPachecoFr/Gestor-Presupuestos-Personales-Microservicios).
 
 Los datos (ingresos, gastos y presupuestos) se almacenan en una base de datos gestionada por el backend. El frontend utiliza **LocalStorage** para almacenar el token de autenticación. El proyecto está diseñado para ser intuitivo, responsive y fácil de usar, con un enfoque en la experiencia del usuario y la funcionalidad práctica para la gestión financiera diaria. **El proyecto está finalizado**, pero abierto a mejoras y contribuciones futuras.
 
 ## Características principales
 
 - 📊 **Registro de transacciones**: Añade ingresos y gastos en las categorías correspondientes.
-- 💰 **Gestión de presupuestos**: Crea presupuestos mensuales o por categorías para controlar tus gastos.
+- 💰 **Metas financieras**: Permite crear y gestionar metas de ahorro, como ahorrar una cantidad específica para un objetivo (por ejemplo, comprar un coche).
 - 📈 **Reportes visuales**: Visualiza tus finanzas con gráficos claros y detallados.
 - 📱 **Diseño responsive**: Compatible con dispositivos móviles y de escritorio gracias a **Tailwind CSS**.
 - 🔒 **Almacenamiento seguro**: Los datos se guardan en una base de datos a través del backend; el token de autenticación se almacena en LocalStorage.

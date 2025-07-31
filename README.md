@@ -9,7 +9,7 @@ Los datos (ingresos, gastos y presupuestos) se almacenan en una base de datos ge
 ## Características principales
 
 - 📊 **Registro de transacciones**: Añade ingresos y gastos en las categorías correspondientes.
-- 💰 **Metas financieras**: Permite crear y gestionar metas de ahorro, como ahorrar una cantidad específica para un objetivo (por ejemplo, comprar un coche).
+- 💰 **Metas financieras**: Facilita la creación y seguimiento de metas de ahorro, como ahorrar para un objetivo específico (por ejemplo, comprar un coche).
 - 📈 **Reportes visuales**: Visualiza tus finanzas con gráficos claros y detallados.
 - 📱 **Diseño responsive**: Compatible con dispositivos móviles y de escritorio gracias a **Tailwind CSS**.
 - 🔒 **Almacenamiento seguro**: Los datos se guardan en una base de datos a través del backend; el token de autenticación se almacena en LocalStorage.

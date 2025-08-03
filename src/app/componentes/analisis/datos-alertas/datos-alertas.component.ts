@@ -32,7 +32,7 @@ export class DatosAlertasComponent {
   cargarDatos(){
     const ignoradas = JSON.parse(localStorage.getItem('alertasIgnoradas') || '[]');
     this.transaccionService.obtenerTransacciones().subscribe(transacciones => {
-      this.transaccionesFiltradas = transacciones.filter((t: Transaccion) => t.cantidad > 1000 && 
+      this.transaccionesFiltradas = transacciones.filter((t: Transaccion) => t.cantidad > 1000 && t.tipo == "gasto" &&
       !ignoradas.includes(t.id));
     })
   }

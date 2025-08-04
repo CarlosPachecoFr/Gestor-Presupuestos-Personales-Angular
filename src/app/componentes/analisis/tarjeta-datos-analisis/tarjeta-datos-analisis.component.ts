@@ -42,7 +42,7 @@ export class TarjetaDatosAnalisisComponent {
     })
     this.transaccionService.obtenerTransacciones().subscribe(transacciones => {
       this.transaccionesFiltrar = transacciones;
-      this.alertas = this.transaccionesFiltrar.filter((t: Transaccion) => t.cantidad > 1000 && !ignoradas.includes(t.id)).length;
+      this.alertas = this.transaccionesFiltrar.filter((t: Transaccion) => t.cantidad > 1000 && t.tipo == "gasto" && !ignoradas.includes(t.id)).length;
     })
   }
 }

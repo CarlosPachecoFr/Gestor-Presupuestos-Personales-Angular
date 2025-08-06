@@ -150,13 +150,17 @@ export class TodoMetasComponent {
     if(this.formularioDinero.valid){
       const cantidad_añadir = this.formularioDinero.get('cantidad_añadir')?.value;
       const balance = await firstValueFrom(this.transaccionService.obtenerBalancePorId());
+      const meta = await firstValueFrom(this.metaService.obtenerMetaPorId(this.metaId));
+      const diferencia_objetivo = meta.cantidad_objetivo - meta.cantidad_actual;
+      if(cantidad_añadir > diferencia_objetivo){
+        this.error = "La cantidad a añadir no puede ser mayor a la diferencia del objetivo";
+        return; //Detener el proceso
+      }
       if(balance < cantidad_añadir){
-        console.log(balance);
         this.error = "No tienes suficiente balance para añadir esta cantidad";
         return; //Detener el proceso
       }
       await firstValueFrom(this.metaService.añadirCantidadMeta(cantidad_añadir,this.metaId));
-      const meta = await firstValueFrom(this.metaService.obtenerMetaPorId(this.metaId));
       const transaccion = {
         tipo: 'gasto',
         cantidad: this.formularioDinero.get('cantidad_añadir')?.value,

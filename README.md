@@ -139,6 +139,6 @@ Si tienes preguntas, sugerencias o quieres colaborar, puedes contactarme a trav�
 
 - **GitHub**: [CarlosPachecoFr](https://github.com/CarlosPachecoFr)
 - **Correo**: carlospachecofrutos@gmail.com
-- **Linkedin**: https://www.linkedin.com/in/carlos-pacheco-7825a4351/
+- **LinkedIn**: https://www.linkedin.com/in/carlos-pacheco-7825a4351/
 
 ¡Gracias por tu interés en **Gestor de Presupuestos Personales**! 🚀
